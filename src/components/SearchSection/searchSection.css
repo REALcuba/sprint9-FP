@@ -1,0 +1,33 @@
+.searchSection {
+  width: 100%;
+  color: #fff;
+  /* background-image: linear-gradient(
+      rgba(65, 62, 62, 0.527),
+      rgba(67, 62, 62, 0.7)
+    ),
+    url("../../img/home_page_collage.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; */
+  padding: 50px;
+  font-family: sans-serif;
+}
+
+
+.searchSection h1 {
+  /* font-size: 6.5vw; */
+  font-weight: bold;
+  margin: 1.6rem 0;
+  color: #adebce;
+}
+
+/* .searchSection p {
+  font-size: 2.5vw;
+} */
+.searchBarDiv {
+width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
