@@ -1,15 +1,16 @@
-import  { useState } from 'react'
-import './loginForm.css'
-import { Link } from 'react-router-dom'
-import useAuthStore from '../../store/UseStore'
 
-const Login: React.FC = () => {
-// const navigate = useNavigate()
+import { useState } from 'react'
+// import './loginForm.css'
+import { Link, useNavigate } from 'react-router-dom'
+import useAuthStore from '../store/UseStore'
+
+const SignUp: React.FC = () => {
+  const navigate = useNavigate()
 
   // const [emailReg, setEmailReg] = useState('')
   // const [passwordReg, setpasswordReg] = useState('')
   // const [anthenError, setAntenError] = useState(false)
-  const { isLoggedIn, user, login, logout } = useAuthStore()
+  const { isLoggedIn, login, logout } = useAuthStore()
   const [username, setUsername] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -24,8 +25,6 @@ const Login: React.FC = () => {
     } else {
       // Llama a la función de login proporcionada por el hook
       login(username, userPassword)
-
-
     }
   }
 
@@ -82,21 +81,19 @@ const Login: React.FC = () => {
         />
 
         <button type='submit' onClick={isLoggedIn ? handleLogout : handleLogin}>
-          {isLoggedIn ? 'Logout' : 'Login'} 
+          {isLoggedIn ? 'Logout' : 'Login'}
         </button>
         {isLoggedIn
-          ? (
-            <>
-              <p>Is logged in: {isLoggedIn ? 'Yes' : 'No'}</p>
-              {isLoggedIn && <p>Welcome, {user?.username}</p>}
-            </>
-            )
+          ? <>{navigate('/')}</>
+
           : (
-            <Link to='/Register'>Not member yet? signup here</Link>
-            )}
+            <>
+              <Link to='/Register'>Not member yet? signup here</Link>
+            </>
+          )}
       </form>
-    </div>
+    </div >
   )
 }
 
-export default Login
+export default SignUp

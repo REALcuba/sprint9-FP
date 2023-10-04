@@ -17,12 +17,14 @@ import mainLogo from '../../assets/img/main_logo.png'
 import nullAvatarIcon from '../../assets/img/blank.jpg'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 
-const pages = ['products', 'cart', 'Angel']
+// const [user, setUser]=
+const pages = ['products', 'cart', 'login']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
+    // const navigate = useNavigate()
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget)
@@ -138,9 +140,14 @@ function ResponsiveAppBar() {
                                 sx={{ my: 2, display: 'block' }}
                             >
                                 {page === 'cart' ? <ShoppingCartOutlinedIcon /> : null}
-                                <Link className='text-green-700' to={page}>
+                                {page === 'login' ? (
+                                    <Link className='text-green-700' to='/sign-in'>
+                                        {page}/SignUp
+                                    </Link>
+                                ) : <Link className='text-green-700' to={page}>
                                     {page}
-                                </Link>
+                                </Link>}
+
                             </Button>
                         ))}
                     </Box>

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import FindReplaceIcon from '@mui/icons-material/FindReplace'
 // style
-import './searchBar.css'
+// import './searchBar.css'
 // import searchGlass from '../../assets/svg/search-glass.svg'
 // import X from '../../assets/svg/cancel-x.svg'
 
@@ -60,20 +60,26 @@ function Searchbar ({ placeholder }: { placeholder: string }): JSX.Element {
   //   // }
   // }
   return (
-    <div role='search' className=' self-center flex flex-col flex-wrap place-content-center'>
-      <form className=' max-w-md mx-auto text-white '>
-        <label htmlFor='search' className=' flex flex-col items-center gap-2'>
-          <div className='relative flex items-center  w-full h-12 rounded-lg focus-within:shadow-lg focus-within:shadow-green-500 bg-slate-950 overflow-hidden'>
+    <div role='search' className=' self-center flex  place-content-center p-2 '>
+      <form className=' max-w-md mx-auto text-slate-400 rounded-full border-2 border-slate-400'>
+        <label htmlFor='search' className=' flex items-center border rounded-lg '>
+          <div className='relative flex items-center  w-full h-12  focus-within:shadow-lg focus-within:shadow-green-500 overflow-hidden'>
             <div className='grid place-items-center h-full w-12'>
 
               <FindReplaceIcon />
             </div>
             <input
-              className='form-input rounded-md bg-slate-950 border-white focus:border-none px-2 peer h-full w-full outline-none text-sm text-gray-700 pr-2'
+              className='form-input rounded-full border-white focus:border-none px-2 peer h-full w-full outline-none text-sm text-gray-700 pr-2'
               type='search'
               placeholder={placeholder}
               onChange={handleSearch}
             />
+            <button
+              className='searchBarBtn Btn focus-within:shadow-lg focus-within:shadow-green-500'
+              value='search '
+            // onClick={handleClick}
+            >Search
+            </button>
           </div>
           {/* <div
             className='absolute rigth-0 w-6  justify-center h-6 rounded-md'
@@ -81,12 +87,12 @@ function Searchbar ({ placeholder }: { placeholder: string }): JSX.Element {
           >
             <img className='relative rounded-md ' src={X} alt='' />
           </div> */}
-          <button
+          {/* <button
             className='searchBarBtn Btn focus-within:shadow-lg focus-within:shadow-green-500'
             value='search '
           // onClick={handleClick}
           >Search
-          </button>
+          </button> */}
         </label>
       </form>
     </div>

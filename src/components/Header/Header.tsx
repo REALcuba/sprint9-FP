@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import menuImg from '../../assets/img/casa.png'
 // import './header.css'
 import mainLogo from '../../assets/img/main_logo.png'
-import SignUpBtn from '../SignUpBtn/SignUpBtn'
+// import SignUpBtn from '../SignUpBtn/SignUpBtn'
 
 // import MenuBtn from "../MenuBtn/MenuBtn";
 import LoginBtn from '../LoginBtn/LoginBtn'
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
 
                 <li className='nav-item Btn'>
                   <Link to='/register'>
-                    <SignUpBtn />
+                    {/* <SignUpBtn /> */}
                   </Link>
                 </li>
                 <li className='nav-item'>

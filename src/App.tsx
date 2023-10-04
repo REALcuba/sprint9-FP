@@ -2,7 +2,7 @@
 // import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
-import SignUp from './pages/SignUp/SignUp'
+import SignUp from './pages/SignUp'
 import ProductPage from './pages/ProductPage/ProductPage'
 import Profile from './pages/Profile/Profile'
 import Donate from './pages/Donate/Donate'

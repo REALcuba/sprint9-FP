@@ -1,21 +1,48 @@
 import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-
-interface BearState {
-    bears: number
-    increase: (by: number) => void
+import { createJSONStorage, devtools, persist } from 'zustand/middleware'
+// import SetStateAction from "zustand"
+import type { } from '@redux-devtools/extension'
+interface UserState {
+    isLoggedIn: boolean;
+    user: { username: string } | null;
+    password: string | null;
 }
 
-export const useBearStore = create<BearState>()(
+interface UserActions {
+    login: (username: string, password: string) => void;
+    logout: () => void;
+}
+
+const useAuthStore = create<UserActions & UserState>()(
     devtools(
         persist(
             (set) => ({
-                bears: 0,
-                increase: (by) => set((state) => ({ bears: state.bears + by }))
+                isLoggedIn: false,
+                user: null,
+                password: null,
+                login: (username: string | null, password: string | null) => {
+                    if (username === null) {
+                        // Your login logic here
+                        return
+                    } else {
+                        set({ isLoggedIn: true, user: { username }, password })
+
+                    }
+                },
+                logout: () => {
+                    // Your logout logic here
+                    set({ isLoggedIn: false, user: null })
+                },
             }),
             {
-                name: 'bear-storage'
+                name: 'auth-storage',
+                storage: createJSONStorage(() => sessionStorage),
+                // getStorage: () => localStorage,
             }
         )
     )
 )
+
+
+
+export default useAuthStore
