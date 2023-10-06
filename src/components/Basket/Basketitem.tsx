@@ -1,11 +1,11 @@
 
 const Basketitem = (props) => {
-  // const deleteItem: React.FC = () => {
-  //   const arrayWithoutItem = props.productList.filter(
-  //     (item) => item.id !== props.id
-  //   )
-  //   props.setProducts(arrayWithoutItem)
-  // }
+  const deleteItem: React.FC = () => {
+    const arrayWithoutItem = props.productList.filter(
+      (item) => item.id !== props.id
+    )
+    props.setProducts(arrayWithoutItem)
+  }
   return (
     <div className='basket-item'>
       <div className='basket-item-info'>

@@ -25,7 +25,7 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
     // const [open, setOpen] = React.useState(false)
     // const handleOpen = () => setOpen(true)
     // const handleClose = () => setOpen(false)
-    const { isLoggedIn, user, login, logout } = useAuthStore()
+    const { isLoggedIn, login, logout } = useAuthStore()
     const [username, setUsername] = useState('')
     const [userPassword, setUserPassword] = useState('')
     // const [username, setUsername] = useState('')

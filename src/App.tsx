@@ -6,6 +6,7 @@ import Home from './pages/Home/Home'
 import ProductPage from './pages/ProductPage/ProductPage'
 import Profile from './pages/Profile/Profile'
 import Donate from './pages/Donate/Donate'
+import BasketPage from './pages/basket/basketPage'
 
 const App: React.FC = () => {
   // const [count, setCount] = useState(0)
@@ -18,6 +19,8 @@ const App: React.FC = () => {
       <Route  path='/products'  element={<ProductPage />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='/donate' element={<Donate />} />
+      <Route path='/cart' element={<BasketPage
+      />} />
     </Routes>
   )
 }
