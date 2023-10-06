@@ -55,7 +55,7 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
         handleLogin()
     }
     return (
-        <div>
+        <>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -113,8 +113,8 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
                             {isLoggedIn
                                 ? (
                                     <>
-                                        <p>Is logged in: {isLoggedIn ? 'Yes' : 'No'}</p>
-                                        {isLoggedIn && <p>Welcome, {user?.username}</p>}
+                                        {`Is logged in: ${isLoggedIn ? 'Yes' : 'No'}.`}
+                                        {isLoggedIn && `Welcome ${username}`}
                                     </>
                                 )
                                 : (
@@ -124,6 +124,6 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
                     </Box>
                 </Fade>
             </Modal>
-        </div>
+        </>
     )
 }

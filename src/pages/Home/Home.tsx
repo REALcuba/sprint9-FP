@@ -4,7 +4,7 @@
 // import ProductSlider from "./components/ProductSlider/ProductSlider";
 // import { useState } from 'react'
 import CategorieSlider from '../../components/CathegoriesSlider/CategoriesSlider'
-import HeaderTest from '../../components/Header/HeaderTest'
+import HeaderTest from '../../components/Header/Header'
 import Searchbar from '../../components/SearchBar/SearchBar'
 // import {is } from useAuthStore
 import useAuthStore from '../../store/UseStore'
