@@ -6,11 +6,14 @@
 import CategorieSlider from '../../components/CathegoriesSlider/CategoriesSlider'
 import HeaderTest from '../../components/Header/HeaderTest'
 import Searchbar from '../../components/SearchBar/SearchBar'
+// import {is } from useAuthStore
+import useAuthStore from '../../store/UseStore'
 // import useAuthStore from '../../store/UseStore'
 // import SearchSection from '../../components/SearchSection/SearchSection'
 
 // import MenuBtn from "../components/MenuBtn/MenuBtn";
 const Home: React.FC = () => {
+  const { isLoggedIn, user } = useAuthStore()
   // const { isLoggedIn, user, login, logout } = useAuthStore()
   // const [username, setUsername] = useState('')
   // const [userPassword, setUserPassword] = useState('')
@@ -39,6 +42,7 @@ const Home: React.FC = () => {
     <div className=''>
       <HeaderTest />
       <Searchbar placeholder='Find your 2 chance' />
+      {isLoggedIn ? <p>Welcome, {user?.username}</p> : null}
       {/* <SearchSection /> */}
       {/* inputs para usar login */}
       {/* <div className='flex flex-col bg-slate-500'>

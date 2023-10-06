@@ -10,21 +10,30 @@ import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
+// import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import mainLogo from '../../assets/img/main_logo.png'
 import nullAvatarIcon from '../../assets/img/blank.jpg'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
+import LoginModal from '../../pages/Login/LoginModal'
+import useAuthStore from '../../store/UseStore'
+import PageButton from './HeaderBtn'
 
 // const [user, setUser]=
 const pages = ['products', 'cart', 'login']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
+    const { isLoggedIn, logout } = useAuthStore()
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
+    const [showLoginModal, setShowLoginModal] = React.useState(false)
+
     // const navigate = useNavigate()
+
+    const logBtn = isLoggedIn ? 'logOut' : 'login' 
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget)
@@ -40,6 +49,16 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
     }
+
+    const handleLoginModalOpen = () => {
+        setShowLoginModal(true)
+
+    }
+
+    const handleLoginModalClose = () => {
+        setShowLoginModal(false)
+    }
+
 
     return (
         <AppBar position='static' >
@@ -130,27 +149,37 @@ function ResponsiveAppBar() {
                         </Menu>
                     </Box>
                     <Box className="justify-end  grow-1 md:flex hidden text-gray-300"
-                        sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-                    >
-                        {pages.map((page) => (
-                            <Button
-                                className='text-green-300'
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, display: 'block' }}
-                            >
-                                {page === 'cart' ? <ShoppingCartOutlinedIcon /> : null}
-                                {page === 'login' ? (
-                                    <Link className='text-green-700' to='/sign-in'>
-                                        {page}/SignUp
-                                    </Link>
-                                ) : <Link className='text-green-700' to={page}>
-                                    {page}
-                                </Link>}
+                        sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}   >
+                        <div>
+                            {pages.map((page) => (
+                                <PageButton
+                                    key={page}
+                                    page={page}
+                                    isLoggedIn={isLoggedIn}
+                                    logBtn={logBtn}
+                                    handleLoginModalOpen={handleLoginModalOpen}
+                                    logout={logout}
+                                // sx={{ my: 2, display: 'flex', flexGrow: 1 }} // Pasamos sx como prop al componente PageButton
+                                />
+                            ))}
+                        </div>
 
-                            </Button>
-                        ))}
                     </Box>
+                    {/* <Box>
+                        {!isLoggedIn ?
+                            (
+                                <>
+                                    <Button onClick={handleLoginModalOpen}>Login</Button>
+
+                                </>
+                            ) : (
+
+                                <Button onClick={logout}>Logout</Button>
+                                // LoginModal()
+                            )}
+                    </Box> */}
+                    <LoginModal isOpen={showLoginModal} onClose={handleLoginModalClose} />
+
 
                     <Box className='w-16' sx={{ flexGrow: 0 }}>
 
