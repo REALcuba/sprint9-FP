@@ -3,13 +3,16 @@
 // import Header from './components/Header/Header.jsx'
 // import ProductSlider from "./components/ProductSlider/ProductSlider";
 // import { useState } from 'react'
-import CategorieSlider from '../../components/CathegoriesSlider/CategoriesSlider'
+// import ProductList from '../../components/Basket/ProductList'
+// import CategorieSlider from '../../components/CathegoriesSlider/CategoriesSlider'
 import HeaderTest from '../../components/Header/Header'
 import Searchbar from '../../components/SearchBar/SearchBar'
+import ProductCard from '../../components/card/Card'
 // import {is } from useAuthStore
 import useAuthStore from '../../store/UseStore'
 // import useAuthStore from '../../store/UseStore'
 // import SearchSection from '../../components/SearchSection/SearchSection'
+import { arrayOfObjects } from "../../components/Basket/Basketitem"
 
 // import MenuBtn from "../components/MenuBtn/MenuBtn";
 const Home: React.FC = () => {
@@ -39,35 +42,18 @@ const Home: React.FC = () => {
   //   logout()
   // }
   return (
-    <div className=''>
+    <>
       <HeaderTest />
-      <Searchbar placeholder='Find your 2 chance' />
+      <Searchbar placeholder='Find your second chance' />
       {isLoggedIn ? <p>Welcome, {user?.username}</p> : null}
-      {/* <SearchSection /> */}
-      {/* inputs para usar login */}
-      {/* <div className='flex flex-col bg-slate-500'>
-        <p>Is logged in: {isLoggedIn ? 'Yes' : 'No'}</p>
-        {isLoggedIn && <p>Welcome, {user?.username}</p>}
-        <div className='bg-slate-500'>
-          <input type="text"
-            className='border'
-            onChange={handleChange}
-          />
-          <input type="email"
-            className='border'
+      <section className='flex justify-center bg-black '>
+        {arrayOfObjects.productList.map((product) => (
 
-            onChange={(e) => {
-              setUserPassword(e.target.value)
-            }}
+          <ProductCard img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
+        ))}
+      </section>
 
-          /> */}
-          {/* <button onClick={handleLogin}>Login</button>
-          <button onClick={handleLogout}>Logout</button>
-        </div> */}
-      {/* </div> */}
-      <CategorieSlider />
-
-    </div>
+    </>
   )
 }
 

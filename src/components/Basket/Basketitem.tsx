@@ -14,7 +14,8 @@ type BasketitemProps = {
 
 }
 // Creación de un array de objetos con el tipo BasketitemProps
-const arrayOfObjects: BasketitemProps =
+// eslint-disable-next-line react-refresh/only-export-components
+export const arrayOfObjects: BasketitemProps =
 {
   deleteItem: () => { /* Función deleteItem */ },
   setProducts: () => { /* Función setProducts */ },
