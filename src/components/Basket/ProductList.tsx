@@ -10,7 +10,7 @@ const ProductList = [
   {
     id: 2,
     image:
-        'https://media.btech.com/media/catalog/product/cache/9cbcea4c652be3b2d9b1aad6a8b9fdeb/p/l/playstation_1.jpg',
+      'https://th.bing.com/th/id/R.8f11653c8d9cd4aba66bbf39c4ac22c7?rik=uxVjKrSjGD3J7Q&pid=ImgRaw&r=0',
     itemName: 'PS4',
     ownerName: 'Asadito',
     pickupAddress: "Dami's House"
@@ -26,7 +26,7 @@ const ProductList = [
   {
     id: 4,
     image:
-        'https://media.btech.com/media/catalog/product/cache/9cbcea4c652be3b2d9b1aad6a8b9fdeb/p/l/playstation_1.jpg',
+      'https://th.bing.com/th/id/R.8f11653c8d9cd4aba66bbf39c4ac22c7?rik=uxVjKrSjGD3J7Q&pid=ImgRaw&r=0',
     itemName: 'PS4',
     ownerName: 'Asadito',
     pickupAddress: "Dami's House"
@@ -42,7 +42,23 @@ const ProductList = [
   {
     id: 6,
     image:
-        'https://media.btech.com/media/catalog/product/cache/9cbcea4c652be3b2d9b1aad6a8b9fdeb/p/l/playstation_1.jpg',
+      'https://th.bing.com/th/id/R.8f11653c8d9cd4aba66bbf39c4ac22c7?rik=uxVjKrSjGD3J7Q&pid=ImgRaw&r=0',
+    itemName: 'PS4',
+    ownerName: 'Asadito',
+    pickupAddress: "Dami's House"
+  },
+  {
+    id: 7,
+    image:
+      'https://th.bing.com/th/id/R.8f11653c8d9cd4aba66bbf39c4ac22c7?rik=uxVjKrSjGD3J7Q&pid=ImgRaw&r=0',
+    itemName: 'PS4',
+    ownerName: 'Asadito',
+    pickupAddress: "Dami's House"
+  },
+  {
+    id: 8,
+    image:
+      'https://th.bing.com/th/id/R.8f11653c8d9cd4aba66bbf39c4ac22c7?rik=uxVjKrSjGD3J7Q&pid=ImgRaw&r=0',
     itemName: 'PS4',
     ownerName: 'Asadito',
     pickupAddress: "Dami's House"

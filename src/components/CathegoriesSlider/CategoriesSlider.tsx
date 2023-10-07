@@ -1,6 +1,6 @@
 // import Slider from "react-slick";
 
-import Card from "../card/Card"
+import Card from "../productCard/ProductCard"
 import {arrayOfObjects}from'../Basket/Basketitem'
 // import dataSlider from "../ProductSlider/Slider/dataSlider";
 

@@ -6,7 +6,7 @@ import Home from './pages/Home/Home'
 import ProductPage from './pages/ProductPage/ProductPage'
 import Profile from './pages/Profile/Profile'
 import Donate from './pages/Donate/Donate'
-import BasketPage from './pages/basket/basketPage'
+import BasketPage from './pages/cart/CartPage'
 
 const App: React.FC = () => {
   // const [count, setCount] = useState(0)

@@ -1,5 +1,7 @@
 // props.setProducts(arrayWithoutItem)
-import ProductCard from '../card/Card'
+import Grid from '@mui/material/Grid'
+import ProductCard from '../productCard/ProductCard'
+import ProductList from './ProductList'
 type Product = {
   id: number;
   image: string;
@@ -19,23 +21,8 @@ export const arrayOfObjects: BasketitemProps =
 {
   deleteItem: () => { /* Función deleteItem */ },
   setProducts: () => { /* Función setProducts */ },
-  productList: [
-    {
-      id: 1,
-      image: 'https://th.bing.com/th/id/R.a1d181449e7b3aa13d5d5b1180b8d7f2?rik=mw8EHt3MR7KUlQ&riu=http%3a%2f%2fwww.cutypaste.com%2fwp-content%2fuploads%2f2017%2f09%2f09e4ddead2663443f56710438e5743a7.jpg&ehk=lvN0Wgdc684dEi2VefR%2fkjjYei1e46ezhUJjVTVuSx4%3d&risl=&pid=ImgRaw&r=0',
-      itemName: 'Producto 1',
-      ownerName: 'Dueño 1',
-      pickupAddress: 'Dirección 1'
-    },
-    {
-      id: 2,
-      image: 'https://i.pinimg.com/originals/e6/00/d3/e600d3d1e94c0270d1745de8dc05379c.jpg',
-      itemName: 'Producto 2',
-      ownerName: 'Dueño 2',
-      pickupAddress: 'Dirección 2'
-    }
-    ,
-  ]
+  productList: ProductList
+
 }// Puedes agregar más objetos BasketitemProps aquí
 
 
@@ -49,29 +36,48 @@ const Basketitem: React.FC<BasketitemProps> = () => {
   console.log(arrayOfObjects.productList[0].itemName)
 
   return (
+    // <section className=''>
+    //   <div className='basket-item grid-cols-4 gap-4'>
+    //     {arrayOfObjects.productList.map((product) => (
+    //       <div key={product.id} className=''>
+    //         <ProductCard key={product.id} img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
+    //         <div className='item-action'>
+    //     <button type='button' className='btn btn-danger' onClick={deleteItem}>
+    //       Delete
+    //     </button>
+    //     <button type='button' className='btn btn-secondary'>
+    //       Contact
+    //     </button>
+    //         </div>
+    //       </div>
+
+    //     )
+    //     )
+    //     }
+    //   </div>
+    // </section >
     <>
-
-
-      <div className='basket-item bg-slate-600 w-5/6 h-32 flex container'>
+      <div className='h2 border rounded-full w-4/6'>filter</div>
+      <section className='flex justify-end p-2 gap-2 border'>
+        <Grid container spacing={1} columns={4} maxWidth={"90%"} minWidth={'30%'} alignContent={'end'} margin={2}>
         {arrayOfObjects.productList.map((product) => (
-          <ProductCard img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
-          
-        )
-        )
-        }
+          <Grid xs={4} md={2} lg={1} key={product.id} className='p-2 '>
 
+            <ProductCard key={product.id} img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
+            <div className='item-action'>
+              <button type='button' className='btn btn-danger' onClick={deleteItem}>
+                Delete
+              </button>
+              <button type='button' className='btn btn-secondary'>
+                Contact
+              </button>
+            </div>
+          </Grid>
 
-      <div className='item-action'>
-        <button type='button' className='btn btn-danger' onClick={deleteItem}>
-          Delete
-        </button>
-        <button type='button' className='btn btn-secondary'>
-          Contact
-        </button>
-      </div>
-    </div>
+        ))}
+        </Grid >
+      </section >
     </>
-
   )
 }
 

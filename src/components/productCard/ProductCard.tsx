@@ -20,7 +20,7 @@ interface ExpandMoreProps extends IconButtonProps {
 }
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
-    const { expand, ...other } = props
+    const { ...other } = props
     return <IconButton {...other} />
 })(({ theme, expand }) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
@@ -38,7 +38,7 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
     }
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 300, minWidth: 250 }} >
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -53,11 +53,15 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
                 title={itemName}
                 subheader="September 14, 2016"
             />
-            <CardMedia
+            <CardMedia sx={{ maxHeight: 250, minHeight: 250, minWidth: 200, objectFit: 'contain' }}
                 component="img"
-                height="194"
+                // h-56
+                // height='50'
+                // min-height="200"
+                // width="auto"
                 image={img}
-                alt="Paella dish"
+                alt={itemName}
+
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -93,6 +97,6 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
 
                 </CardContent>
             </Collapse>
-        </Card>
+        </ Card>
     )
 }
