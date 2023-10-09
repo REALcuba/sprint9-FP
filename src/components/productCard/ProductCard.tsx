@@ -58,7 +58,7 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
     const handleCardViewBtnClick = () => {
         // if (!isExpanded) {
         //     console.log(cardRef)
-            navigate(`/product/${cardRef}`)
+        navigate(`/product-info`)
         // }
     }
     const handleCardClick = () => {

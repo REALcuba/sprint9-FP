@@ -2,7 +2,7 @@
 // import Auth from "../Auth/Auth";
 // import Login from "../Login/Login";
 
-import ProductPage from '../../pages/ProductPage/ProductPage'
+import ProductPage from '../../pages/ProductsPage/ProductPage'
 function ProductPageBtn () {
   return (
     <div>

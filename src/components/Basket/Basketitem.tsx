@@ -27,13 +27,12 @@ export const arrayOfObjects: BasketitemProps =
 
 
 const Basketitem: React.FC<BasketitemProps> = () => {
-  const deleteItem = () => {
-    const arrayWithoutItem = arrayOfObjects.productList.filter(
-      (itemName) => itemName.id !== arrayOfObjects.productList[0].id
-    )
-    arrayOfObjects.setProducts(arrayWithoutItem)
-  }
-  console.log(arrayOfObjects.productList[0].itemName)
+  // const deleteItem = () => {
+  //   const arrayWithoutItem = arrayOfObjects.productList.filter(
+  //     (itemName) => itemName.id !== arrayOfObjects.productList.id
+  //   )
+  //   arrayOfObjects.setProducts(arrayWithoutItem)
+  // }
 
   return (
     // <section className=''>
@@ -65,7 +64,7 @@ const Basketitem: React.FC<BasketitemProps> = () => {
 
             <ProductCard key={product.id} img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
             <div className='item-action'>
-              <button type='button' className='btn btn-danger' onClick={deleteItem}>
+              <button type='button' className='btn btn-danger' >
                 Delete
               </button>
               <button type='button' className='btn btn-secondary'>

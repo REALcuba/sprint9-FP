@@ -1,23 +1,24 @@
 
-// components
-// import Header from './components/Header/Header.jsx'
-// import ProductSlider from "./components/ProductSlider/ProductSlider";
-// import { useState } from 'react'
-// import ProductList from '../../components/Basket/ProductList'
-// import CategorieSlider from '../../components/CathegoriesSlider/CategoriesSlider'
 import HeaderTest from '../../components/Header/Header'
 import Searchbar from '../../components/SearchBar/SearchBar'
 import ProductCard from '../../components/productCard/ProductCard'
-// import {is } from useAuthStore
 import useAuthStore from '../../store/UseStore'
-// import useAuthStore from '../../store/UseStore'
+import { type HomeProps } from '../../types/types.d'
+
 // import SearchSection from '../../components/SearchSection/SearchSection'
-import { arrayOfObjects } from "../../components/Basket/Basketitem"
+// import { arrayOfObjects } from "../../components/Basket/Basketitem"
 import { Grid } from '@mui/material'
+import Filter from '../../components/filter/Filter'
 
 // import MenuBtn from "../components/MenuBtn/MenuBtn";
-const Home: React.FC = () => {
+// type HomeProps = {
+//   changeFilter: (filter: { categories: string; status: string }) => void;
+//   filteredProducts: productsListProps; // Asegúrate de importar el tipo ProductListProps
+// };
+// type filteredProducts = productsListProps
+const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
   const { isLoggedIn, user } = useAuthStore()
+  console.log(filteredProducts)
   // const { isLoggedIn, user, login, logout } = useAuthStore()
   // const [username, setUsername] = useState('')
   // const [userPassword, setUserPassword] = useState('')
@@ -47,10 +48,16 @@ const Home: React.FC = () => {
       <HeaderTest />
       <Searchbar placeholder='Find your second chance' />
       {isLoggedIn ? <p>Welcome, {user?.username}</p> : null}
+      <Filter changeFilter={changeFilter} />
+      {filteredProducts.length === 0 && (
+        <p>No se encontraron productos que coincidan con los filtros.</p>
+      )}
       {/* <section className='flex flex-wrap gap-2 m-2 right w-60'> */}
       <section className='flex justify-end p-2'>
         <Grid container spacing={1} columns={4} maxWidth={"80%"} alignContent={'end'} margin={2}>
-        {arrayOfObjects.productList.map((product) => (
+          {filteredProducts.map((product) => (
+
+
           <Grid xs={4} md={2} lg={1} key={product.id} className='p-2 '>
 
             <ProductCard key={product.id} img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
