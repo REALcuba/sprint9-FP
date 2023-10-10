@@ -45,7 +45,7 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
   return (
     <>
       <HeaderTest />
-      <Searchbar placeholder='Find your second chance' />
+      <Searchbar placeholder='Search' />
       {isLoggedIn ? <p>Welcome, {user?.username}</p> : null}
       <Filter changeFilter={changeFilter} categories={''} status={''} filteredProducts={[]} />
       {filteredProducts.length === 0 && (

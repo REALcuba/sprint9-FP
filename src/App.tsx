@@ -2,7 +2,7 @@
 // import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
-// import SignUp from './pages/SignUp'
+import SignUp from './pages/SignUp'
 import ProductPage from './pages/ProductsPage/ProductsPage'
 import Profile from './pages/Profile/Profile'
 import Donate from './pages/Donate/Donate'
@@ -45,13 +45,12 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route path='/' element={<Home changeFilter={setFilter} filteredProducts={filteredProducts} />} />
-      {/* <Route path='/sign-in' element={<SignUp />} /> */}
+      <Route path='/sign-up' element={<SignUp />} />
       {/* routes to protect */}
       <Route  path='/products'  element={<ProductPage />} />
       <Route path='/profile' element={<Profile />} />
       <Route path='/donate' element={<Donate />} />
-      <Route path='/cart' element={<BasketPage />}
-      />
+      <Route path='/cart' element={<BasketPage />} />
       <Route path='/product-info' element={<ProductInfoPage />} />
     </Routes>
   )

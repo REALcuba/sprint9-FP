@@ -62,8 +62,8 @@ function Searchbar ({ placeholder }: { placeholder: string }): JSX.Element {
   return (
     <div role='search' className=' self-center flex  place-content-center p-2 '>
       <form className=' max-w-md mx-auto text-slate-400 rounded-full border-2 border-slate-400'>
-        <label htmlFor='search' className=' flex items-center  rounded-lg '>
-          <div className='relative flex items-center  w-full h-12  focus-within:shadow-lg focus-within:shadow-green-500 overflow-hidden'>
+        <label htmlFor='search' className=' flex items-center  rounded-full '>
+          <div className='relative flex items-center rounded-full w-full h-12  focus-within:shadow-lg focus-within:shadow-green-500 overflow-hidden'>
             <div className='grid place-items-center h-full w-12'>
 
               <FindReplaceIcon />
