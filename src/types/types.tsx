@@ -13,6 +13,11 @@ export type productsListProps = {
 }[]
 
 export type HomeProps = {
-  changeFilter: (filter: { categories: string; status: string }) => void;
+  changeFilter: (callback: (prevFilter: FilterProps) => FilterProps) => void;
+
   filteredProducts: productsListProps;
 };
+export interface FilterProps extends HomeProps {
+  categories: string,
+  status: string,
+}

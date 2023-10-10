@@ -10,25 +10,30 @@ import BasketPage from './pages/cart/CartPage'
 import ProductInfoPage from './pages/productInfoPage/ProductInfoPage'
 import ProductList from './components/Basket/ProductList'
 import { useEffect, useState } from 'react'
-import { type productsListProps } from './types/types.d'
+import { type productsListProps, type FilterProps } from './types/types'
 
+// interface FilterProps {
+//   categories: string;
+//   status: string;
+// }
 const App: React.FC = () => {
-  const [filter, setFilter] = useState({
+  const [filter, setFilter] = useState<FilterProps>({
     categories: "All",
-    status: "All"
+    status: "All",
+    changeFilter: () => { },
+    filteredProducts: []
   })
-  // const [filteredProducts, setFilteredProducts] = useState<ProductListProps>([])
-  console.log(filter)
-  const lowercaseStatus = filter.status.toLowerCase()
-  const lowercaseCategories = filter.categories.toLowerCase()
-  const filterProducts = (ProductList: productsListProps) => {
-    return ProductList.filter((product) => {
+
+  const lowercaseStatusFilter = filter.status.toLowerCase()
+  const lowercaseCategoriesFilter = filter.categories.toLowerCase()
+
+  const filterProducts = (productListProps: productsListProps): productsListProps => {
+    return productListProps.filter((product) => {
       const productStatus = product.status.toLowerCase()
       const productCategory = product.category.toLowerCase()
 
-      // Comprueba si el filtro es "all" o si coincide con la categoría y el estado del producto
-      const statusMatch = filter.status === "All" || productStatus === lowercaseStatus
-      const categoryMatch = filter.categories === "All" || productCategory === lowercaseCategories
+      const statusMatch = filter.status === "All" || productStatus === lowercaseStatusFilter
+      const categoryMatch = filter.categories === "All" || productCategory === lowercaseCategoriesFilter
 
       return statusMatch && categoryMatch
     })

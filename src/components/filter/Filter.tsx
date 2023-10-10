@@ -1,10 +1,8 @@
-type FilterProps = {
-    changeFilter: (prevFilter: { categories: string; status: string }) => void;
-};
-
+import { FilterProps } from "../../types/types"
 const Filter: React.FC<FilterProps> = ({ changeFilter }) => {
     const handleChangeCategory = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         const selectedCategory: string = event.target.value
+
         changeFilter((prevFilter) => ({
             ...prevFilter,
             categories: selectedCategory,
@@ -13,6 +11,7 @@ const Filter: React.FC<FilterProps> = ({ changeFilter }) => {
 
     const handleChangeStatus = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         const selectedStatus: string = event.target.value
+
         changeFilter((prevFilter) => ({
             ...prevFilter,
             status: selectedStatus,

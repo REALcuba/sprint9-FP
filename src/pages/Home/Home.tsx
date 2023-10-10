@@ -3,7 +3,7 @@ import HeaderTest from '../../components/Header/Header'
 import Searchbar from '../../components/SearchBar/SearchBar'
 import ProductCard from '../../components/productCard/ProductCard'
 import useAuthStore from '../../store/UseStore'
-import { type HomeProps } from '../../types/types.d'
+import { type HomeProps } from '../../types/types'
 
 // import SearchSection from '../../components/SearchSection/SearchSection'
 // import { arrayOfObjects } from "../../components/Basket/Basketitem"
@@ -18,7 +18,6 @@ import Filter from '../../components/filter/Filter'
 // type filteredProducts = productsListProps
 const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
   const { isLoggedIn, user } = useAuthStore()
-  console.log(filteredProducts)
   // const { isLoggedIn, user, login, logout } = useAuthStore()
   // const [username, setUsername] = useState('')
   // const [userPassword, setUserPassword] = useState('')
@@ -48,7 +47,7 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
       <HeaderTest />
       <Searchbar placeholder='Find your second chance' />
       {isLoggedIn ? <p>Welcome, {user?.username}</p> : null}
-      <Filter changeFilter={changeFilter} />
+      <Filter changeFilter={changeFilter} categories={''} status={''} filteredProducts={[]} />
       {filteredProducts.length === 0 && (
         <p>No se encontraron productos que coincidan con los filtros.</p>
       )}

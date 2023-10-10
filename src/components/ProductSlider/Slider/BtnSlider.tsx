@@ -1,7 +1,7 @@
 // import "./Slider.css";
 import leftArrow from '../img/back-to.png'
 import rightArrow from '../img/next-page.png'
-import { buttonProps } from '../../../types/types.d'
+import { buttonProps } from '../../../types/types'
 
 const BtnSlider: React.FC<buttonProps> = ({ direction, moveSlide }) => {
   return (
