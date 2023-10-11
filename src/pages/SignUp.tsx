@@ -7,30 +7,30 @@ import useAuthStore from '../store/UseStore'
 const SignUp: React.FC = () => {
   const navigate = useNavigate()
 
-  // const [emailReg, setEmailReg] = useState('')
+  // const [email, setEmail] = useState('')
   // const [passwordReg, setpasswordReg] = useState('')
   // const [anthenError, setAntenError] = useState(false)
-  const { isLoggedIn, login, logout } = useAuthStore()
-  const [username, setUsername] = useState('')
+  const { isLoggedIn, signUp, logOut } = useAuthStore()
+  const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setUsername(e.target.value)
+    setUserEmail(e.target.value)
   }
   const handleLogin = () => {
     if (isLoggedIn) return
-    if (username === '' || userPassword === '') {
+    if (userEmail === '' || userPassword === '') {
       alert(`Please enter a valid: username and password`)
       console.log('Please enter a username')
 
     } else {
       // Llama a la función de login proporcionada por el hook
-      login(username, userPassword)
+      signUp(userEmail, userPassword)
     }
   }
 
   const handleLogout = () => {
     // Llama a la función de logout proporcionada por el hook
-    logout()
+    logOut()
   }
   const Register: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -60,7 +60,7 @@ const SignUp: React.FC = () => {
   return (
     <div className='loginform d-flex justify-content-center align-items-center'>
       <form className='loginmember d-flex flex-column' onSubmit={Register}>
-        <h1>Member Login</h1>
+        <h1>Sign up</h1>
 
         <input
           className='form-control'
@@ -88,7 +88,7 @@ const SignUp: React.FC = () => {
 
           : (
             <>
-              <Link to='/Register'>Not member yet? signup here</Link>
+              <Link to='/'>Already a  memebr? Login here</Link>
             </>
           )}
       </form>

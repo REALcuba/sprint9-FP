@@ -25,31 +25,32 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
     // const [open, setOpen] = React.useState(false)
     // const handleOpen = () => setOpen(true)
     // const handleClose = () => setOpen(false)
-    const { isLoggedIn, login, logout } = useAuthStore()
-    const [username, setUsername] = useState('')
+    const { isLoggedIn, logIn } = useAuthStore()
+    const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     // const [username, setUsername] = useState('')
     // const [userPassword, setUserPassword] = useState('')
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-        setUsername(e.target.value)
+    const handleChangeEmail: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+        setUserEmail(e.target.value)
+    }
+    const handleChangePassword: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+        setUserPassword(e.target.value)
+
     }
     const handleLogin = () => {
         if (isLoggedIn) return
-        if (username === '' || userPassword === '') {
+        if (userEmail === '' || userPassword === '') {
             alert(`Please enter a valid: username and password`)
             console.log('Please enter a username')
 
         } else {
             // Llama a la función de login proporcionada por el hook
-            login(username, userPassword)
+            logIn(userEmail, userPassword)
 
 
         }
     }
-    const handleLogout = () => {
-        // Llama a la función de logout proporcionada por el hook
-        logout()
-    }
+
     const Register: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault()
         handleLogin()
@@ -82,7 +83,7 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
                                 type='text'
                                 placeholder='username'
                                 required
-                                onChange={handleChange}
+                                onChange={handleChangeEmail}
                             />
 
                             <input
@@ -90,35 +91,24 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
                                 type='password'
                                 placeholder='password'
                                 required
-                                onChange={(e) => {
-                                    setUserPassword(e.target.value)
-                                }}
+                                onChange={handleChangePassword}
                             />
 
-                            <button type='submit' onClick={isLoggedIn ? handleLogout : handleLogin}>
-                                {isLoggedIn ? 'Logout' : 'Login'}
+                            <button type='submit' onClick={handleLogin} value='Login'>
+                                Login
                             </button>
-                            {/* {isLoggedIn
-                                ? (
-                                    <>
-                                        <p>Is logged in: {isLoggedIn ? 'Yes' : 'No'}</p>
-                                        {isLoggedIn && <p>Welcome, {user?.username}</p>}
-                                    </>
-                                )
-                                : (
-                                    <Link to='/Register'>Not member yet? signup here</Link>
-                                )} */}
+
                         </form>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                             {isLoggedIn
                                 ? (
                                     <>
                                         {`Is logged in: ${isLoggedIn ? 'Yes' : 'No'}.`}
-                                        {isLoggedIn && `Welcome ${username}`}
+                                        {isLoggedIn && `Welcome ${userEmail}`}
                                     </>
                                 )
                                 : (
-                                    <Link to='/Register'>Not member yet? signup here</Link>
+                                    <Link to='/sign-up'>Not member yet? signup here</Link>
                                 )}
                         </Typography>
                     </Box>
