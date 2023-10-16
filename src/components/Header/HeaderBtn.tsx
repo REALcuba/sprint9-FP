@@ -40,7 +40,6 @@ const NavMenuButton: React.FC<PageButtonProps> = ({
         children: null,
 
 
-
     }
 
     if (page === 'cart') {

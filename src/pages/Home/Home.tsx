@@ -9,6 +9,7 @@ import { type HomeProps } from '../../types/types'
 // import { arrayOfObjects } from "../../components/Basket/Basketitem"
 import { Grid } from '@mui/material'
 import Filter from '../../components/filter/Filter'
+// import { Session, User } from '@supabase/supabase-js'
 
 // import MenuBtn from "../components/MenuBtn/MenuBtn";
 // type HomeProps = {
@@ -16,8 +17,14 @@ import Filter from '../../components/filter/Filter'
 //   filteredProducts: productsListProps; // Asegúrate de importar el tipo ProductListProps
 // };
 // type filteredProducts = productsListProps
+// type Dataprops = {
+
+//   user: User;
+//   session: Session;
+
+// }
 const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
-  const { isLoggedIn, user } = useAuthStore()
+  const { isLoggedIn, data } = useAuthStore()
   // const { isLoggedIn, user, login, logout } = useAuthStore()
   // const [username, setUsername] = useState('')
   // const [userPassword, setUserPassword] = useState('')
@@ -42,12 +49,14 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
   //   // Llama a la función de logout proporcionada por el hook
   //   logout()
   // }
+  console.log(data)
+
   return (
     <>
       <HeaderTest />
       <Searchbar placeholder='Search' />
-      {isLoggedIn ? <p>Welcome, {user?.username}</p> : null}
-      <Filter changeFilter={changeFilter} categories={''} status={''} filteredProducts={[]} />
+      {isLoggedIn ? <p>Welcome, {data?.user?.email}</p> : null}
+      <Filter changeFilter={changeFilter} categories={''} status={''} filteredProducts={filteredProducts} />
       {filteredProducts.length === 0 && (
         <p>No se encontraron productos que coincidan con los filtros.</p>
       )}
@@ -57,7 +66,7 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
           {filteredProducts.map((product) => (
 
 
-          <Grid xs={4} md={2} lg={1} key={product.id} className='p-2 '>
+            <Grid key={product.id} className='p-2 '>
 
             <ProductCard key={product.id} img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
           </Grid>

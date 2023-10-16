@@ -25,7 +25,7 @@ const pages = ['products', 'cart', 'login']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
-    const { isLoggedIn, logout } = useAuthStore()
+    const { isLoggedIn, logOut } = useAuthStore()
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
@@ -158,29 +158,16 @@ function ResponsiveAppBar() {
                                     isLoggedIn={isLoggedIn}
                                     logBtn={logBtn}
                                     handleLoginModalOpen={handleLoginModalOpen}
-                                    logout={logout}
+                                    logout={logOut}
                                 // sx={{ my: 2, display: 'flex', flexGrow: 1 }} // Pasamos sx como prop al componente PageButton
                                 />
                             ))}
                         </div>
 
                     </Box>
-                    {/* <Box>
-                        {!isLoggedIn ?
-                            (
-                                <>
-                                    <Button onClick={handleLoginModalOpen}>Login</Button>
-
-                                </>
-                            ) : (
-
-                                <Button onClick={logout}>Logout</Button>
-                                // LoginModal()
-                            )}
-                    </Box> */}
+                
                     <LoginModal isOpen={showLoginModal} onClose={handleLoginModalClose} />
-
-
+                    
                     <Box className='w-16' sx={{ flexGrow: 0 }}>
 
                         <Tooltip title='Open settings' >

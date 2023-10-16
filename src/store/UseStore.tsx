@@ -3,21 +3,25 @@ import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 import { supabase } from '../supabase/supabase'
 // import SetStateAction from "zustand"
 import type { } from '@redux-devtools/extension'
-import { User } from '@supabase/supabase-js'
-interface UserState {
-    isLoggedIn: boolean;
-    user: User | null;
-    password: string | number | null;
-    email: string | number | null;
-    data?: unknown;
-}
+// import { User } from '@supabase/supabase-js'
+import { UserState } from '../types/types'
+// import { User } from '@supabase/supabase-js'
+// interface UserState {
+//     isLoggedIn: boolean;
+//     user: User | null;
+//     password: string | number | null;
+//     email: string | number | null;
+//     data?: unknown;
+// }
 
 interface UserActions {
-    user: string | null;
+// user: User | null;
+    password: string | number | null;
+    email: string | number | null;
     signUp: (email: string, password: string) => Promise<void>;
     logIn: (email: string, password: string) => Promise<void>;
     logOut: () => Promise<void>;
-    data?: unknown;
+    // data?: unknown;
 
 }
 
@@ -30,37 +34,47 @@ const useAuthStore = create<UserActions & UserState>()(
                 password: null,
                 email: null,
                 signUp: async (email: string, password: string) => {
-                    const { data, error } = await supabase.auth.signUp({
-                        email: email,
-                        password: password,
-                    })
-                    if (error) {
-                        console.error('Error al registrarse:', error)
-                    } else {
-                        set({ isLoggedIn: true, data })
-                        console.log(data)
+                    try {
+                        const { data, error } = await supabase.auth.signUp({
+                            email: email,
+                            password: password,
+                        })
+                        if (error) {
+                            console.error('Error al registrarse:', error)
+                        } else {
+                            set({ data })
+                            // set({
+                            //     isLoggedIn: true, data: data,
+                            // })
+                        }
+                    } catch (error) {
+                        console.log(error)
 
                     }
+
                 },
                 logIn: async (email, password) => {
-                    const { data, error } = await supabase.auth.signInWithPassword({
-                        email,
-                        password,
-                    })
-                    if (error) {
-                        console.error('Error al iniciar sesión:', error)
-                    } else {
-                        set({ isLoggedIn: true, data })
+                    try {
+                        const { data, error } = await supabase.auth.signInWithPassword({
+                            email,
+                            password,
+                        })
+                        if (error) {
+                            console.error('Error al iniciar sesión:', error)
+                        } else {
+                            set({ isLoggedIn: true, data: data })
+                        }
+
+                    } catch (error) {
+                        console.log(error)
 
                     }
+
                 },
                 logOut: async () => {
                     await supabase.auth.signOut()
-                    set({ isLoggedIn: false, user: null })
+                    set({ isLoggedIn: false })
                 },
-                // signup: (_username: string | null, password: string | null) => {
-
-                // }
             }),
             {
                 name: 'auth-storage',
