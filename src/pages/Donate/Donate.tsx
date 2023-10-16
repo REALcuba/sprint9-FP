@@ -19,14 +19,16 @@ const Donate: React.FC = () => {
   return (
     <>
       <Header />
-      <section className=' flex justify-center items-center '>
-        <form className='loginmember flex flex-col w-3/5'>
-          <h1>Donate your product</h1>
+      <section className=' flex justify-center items-center m-5 bg-green-300 rounded'>
+        <form className='flex flex-col justify-center align-middle w-3/5 gap-3'>
+          <h1 className='text-center text-lg'>Donate your product</h1>
           <label htmlFor='product' className='form-label'>
             Nombre del producto:
           </label>
           <input
-            className='form-input'
+            id='product'
+            // name='product'
+            className='rounded'
             type='title'
             placeholder='Nombre del producto'
             required
@@ -38,36 +40,47 @@ const Donate: React.FC = () => {
           <label htmlFor='status' className='form-label'>
             Status:
           </label>
-          <input
-            className='form-control'
-            type='status'
+          <select
+            id='status'
+            name='status'
+            className='rounded'
+          // type='status'
             placeholder='Status'
             required
             onChange={(e) => {
               setStatus(e.target.value)
               console.log(status)
             }}
-          />
+          > <option value="used">Used</option>
+            <option value="new">New</option>
+          </select>
           <label htmlFor='cathegory' className='form-label'>
             Categoria:
           </label>
-          <input
-            className='form-control'
-            type='text'
+          <select
+            id='cathegory'
+            // name='cathegory'
+            className='rounded'
+          // type='text'
             placeholder='Categoria'
             required
             onChange={(e) => {
               setCathegory(e.target.value)
               console.log(cathegory)
             }}
-          />
+          >
+            <option value="electronic">Electronic</option>
+            <option value="furniture">Furniture</option>
+            <option value="clothe">Clothe</option>
+          </select>
           <label htmlFor='description' className='form-label'>
             Descripción:
           </label>
-          <input
-            className='form-control'
-            type='description'
-            placeholder='descripción'
+          <textarea
+            id='description'
+            className='rounded'
+            // type='text'
+            placeholder='describe tu producto'
             required
             onChange={(e) => {
               setDescription(e.target.value)
@@ -78,6 +91,7 @@ const Donate: React.FC = () => {
             Imagen:
           </label>
           <input
+            id='pic'
             className='form-control'
             type='file'
             // ref={selectedFile}
@@ -90,9 +104,9 @@ const Donate: React.FC = () => {
           />
           {/* <h2>{productInfo}</h2> */}
           <button
-            className='border'
+            className='border m-2 bg-green-500 rounded'
           // onClick={uploader}
-          >Donate
+          >Share it!
           </button>
 
           {/* <Link to="/Register">Not member yet? signup here</Link> */}

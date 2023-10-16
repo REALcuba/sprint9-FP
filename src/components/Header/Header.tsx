@@ -25,7 +25,7 @@ const pages = ['products', 'cart', 'login']
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
-    const { isLoggedIn, logOut } = useAuthStore()
+    const { isLoggedIn, logOut, data } = useAuthStore()
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
@@ -172,7 +172,7 @@ function ResponsiveAppBar() {
 
                         <Tooltip title='Open settings' >
                             <IconButton className='w-12' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt='Angel' src={nullAvatarIcon} />
+                                <Avatar alt={data?.user?.email} src={data?.user?.avatar ? data?.user?.avatar : nullAvatarIcon} />
                             </IconButton>
                         </Tooltip>
                         <Menu
