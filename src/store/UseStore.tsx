@@ -5,15 +5,7 @@ import { supabase } from '../supabase/supabase'
 import type { } from '@redux-devtools/extension'
 // import { User } from '@supabase/supabase-js'
 import { UserState } from '../types/types'
-// import { User } from '@supabase/supabase-js'
-// interface UserState {
-//     isLoggedIn: boolean;
-//     user: User | null;
-//     password: string | number | null;
-//     email: string | number | null;
-//     data?: unknown;
-// }
-
+// import { useNavigate } from 'react-router-dom'
 interface UserActions {
 // user: User | null;
     password: string | number | null;
@@ -21,6 +13,7 @@ interface UserActions {
     signUp: (email: string, password: string) => Promise<void>;
     logIn: (email: string, password: string) => Promise<void>;
     logOut: () => Promise<void>;
+    handleAvatarInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     // data?: unknown;
 
 }
@@ -33,6 +26,7 @@ const useAuthStore = create<UserActions & UserState>()(
                 user: null,
                 password: null,
                 email: null,
+                avatarUrl: null,
                 signUp: async (email: string, password: string) => {
                     try {
                         const { data, error } = await supabase.auth.signUp({
@@ -54,12 +48,16 @@ const useAuthStore = create<UserActions & UserState>()(
 
                 },
                 logIn: async (email, password) => {
+
                     try {
                         const { data, error } = await supabase.auth.signInWithPassword({
                             email,
                             password,
                         })
+
                         if (error) {
+                       
+                        
                             console.error('Error al iniciar sesión:', error)
                         } else {
                             set({ isLoggedIn: true, data: data })
@@ -73,9 +71,35 @@ const useAuthStore = create<UserActions & UserState>()(
                 },
                 logOut: async () => {
                     await supabase.auth.signOut()
-                    set({ isLoggedIn: false })
+                    set({ isLoggedIn: false, avatarUrl: null })
+                },
+                handleAvatarInputChange: async (event: React.ChangeEvent<HTMLInputElement>) => {
+                    const file = event.target.files?.[0]
+
+                    if (file) {
+                        try {
+                            // Sube el archivo al bucket 'avatar' en Supabase Storage
+                            const { error } = await supabase.storage
+                                .from('avatar')
+                                .upload(`avatar_${Date.now()}.png`, file)
+
+                            if (error) {
+                                console.error(error.message)
+                                return
+                            } else {
+                                // Obtiene la URL del archivo subido y la muestra en la interfaz
+                                const avatarUrl = `${supabase.storage}/avatar/${file}`
+                                // setImageUrl(fileUrl)
+                                console.log(avatarUrl)
+                                set({ avatarUrl: avatarUrl })
+                            }
+                        } catch (error) {
+                            console.error(error)
+                        }
+                    }
                 },
             }),
+
             {
                 name: 'auth-storage',
                 storage: createJSONStorage(() => sessionStorage),

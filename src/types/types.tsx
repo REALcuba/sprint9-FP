@@ -91,6 +91,7 @@ export type DataProps = {
 export interface UserState {
   isLoggedIn: boolean;
   // user: User | null;
+  avatarUrl: string | null;
   password: string | number | null;
   email: string | number | null;
   data?: DataProps;

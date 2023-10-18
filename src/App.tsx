@@ -12,7 +12,8 @@ import ProductList from './components/Basket/ProductList'
 import { useEffect, useState } from 'react'
 import { type productsListProps, type FilterProps } from './types/types'
 import { supabase } from './supabase/supabase'
-// import useAuthStore from './store/UseStore'
+import useAuthStore from './store/UseStore'
+import { ProtectedRoute } from './components/protectedRoute/ProtectedRoute'
 
 // interface FilterProps {
 //   categories: string;
@@ -20,6 +21,7 @@ import { supabase } from './supabase/supabase'
 // }
 const App: React.FC = () => {
   // const { user } = useAuthStore()
+  const { isLoggedIn } = useAuthStore()
   const [filter, setFilter] = useState<FilterProps>({
     categories: "All",
     status: "All",
@@ -89,10 +91,16 @@ const App: React.FC = () => {
       <Route path='/sign-up' element={<SignUp />} />
       {/* routes to protect */}
       <Route path='/products' element={<ProductPage changeFilter={setFilter} filteredProducts={filteredProducts} categories={''} status={''} />} />
-      <Route path='/profile' element={<Profile />} />
-      <Route path='/donate' element={<Donate />} />
       <Route path='/cart' element={<BasketPage />} />
       <Route path='/product-info' element={<ProductInfoPage />} />
+      <Route path='/profile/*' element={
+        <ProtectedRoute path='/profile' element={<Profile />} isLoggedIn={isLoggedIn} />
+      } />
+      <Route />
+      <Route path='/donate' element={
+        <ProtectedRoute path='/donate' element={<Donate />} isLoggedIn={isLoggedIn} />
+      } />
+      <Route />
     </Routes>
   )
 }

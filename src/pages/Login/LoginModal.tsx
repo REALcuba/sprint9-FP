@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import useAuthStore from '../../store/UseStore'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const style = {
     position: 'absolute' as const,
@@ -25,7 +26,8 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
     // const [open, setOpen] = React.useState(false)
     // const handleOpen = () => setOpen(true)
     // const handleClose = () => setOpen(false)
-    const { isLoggedIn, logIn } = useAuthStore()
+    const navigate = useNavigate()
+    const { isLoggedIn, logIn, data } = useAuthStore()
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     // const [username, setUsername] = useState('')
@@ -39,11 +41,15 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean, onClo
     }
     const handleLogin = () => {
         if (isLoggedIn) return
+
         if (userEmail === '' || userPassword === '') {
             alert(`Please enter a valid: username and password`)
             console.log('Please enter a username')
 
-        } else {
+        } else if (data?.user === null) {
+            navigate('/sign-up')
+        }
+        else {
             // Llama a la función de login proporcionada por el hook
             logIn(userEmail, userPassword)
 

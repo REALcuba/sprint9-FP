@@ -2,6 +2,7 @@
 import Button from '@mui/material/Button'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { useNavigate } from 'react-router-dom'
+import useAuthStore from '../../store/UseStore'
 
 interface PageButtonProps {
     page: string;
@@ -14,11 +15,12 @@ interface PageButtonProps {
 
 const NavMenuButton: React.FC<PageButtonProps> = ({
     page,
-    isLoggedIn,
+    // isLoggedIn,
     logBtn,
     handleLoginModalOpen,
     logout,
 }) => {
+    const { isLoggedIn, logOut } = useAuthStore()
 
     const navigate = useNavigate() // Obtiene la ubicación actual
     const redirectToPage = () => {
@@ -57,7 +59,7 @@ const NavMenuButton: React.FC<PageButtonProps> = ({
         buttonProps.children = logBtn
     } else if (page === 'login' && isLoggedIn) {
         // buttonProps.component = 'button'
-        buttonProps.onClick = logout
+        buttonProps.onClick = logOut
         buttonProps.children = logBtn
     } else {
         // buttonProps.component = 'button'

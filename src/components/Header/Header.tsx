@@ -18,22 +18,25 @@ import nullAvatarIcon from '../../assets/img/blank.jpg'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import LoginModal from '../../pages/Login/LoginModal'
 import useAuthStore from '../../store/UseStore'
-import PageButton from './HeaderBtn'
+import PageButton from './NavMenuButton'
+import AvatarMenuButton from '../avatarMenuBtn/AvatarMenuBtn'
+// import { supabase } from '../../supabase/supabase'
+// import { useRef } from 'react'
 
 // const [user, setUser]=
-const pages = ['products', 'cart', 'login']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
-    const { isLoggedIn, logOut, data } = useAuthStore()
+    const { isLoggedIn, logOut, data, avatarUrl, } = useAuthStore()
+    const logBtn = isLoggedIn ? 'logOut' : 'login'
+    const pages = ['products', 'cart', logBtn]
+    const settings = ['Profile', 'Donate', logBtn]
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
     const [showLoginModal, setShowLoginModal] = React.useState(false)
-
+    // const [imageUrl, setImageUrl] = React.useState<null | string>(null)
     // const navigate = useNavigate()
 
-    const logBtn = isLoggedIn ? 'logOut' : 'login' 
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget)
@@ -58,6 +61,28 @@ function ResponsiveAppBar() {
     const handleLoginModalClose = () => {
         setShowLoginModal(false)
     }
+    // const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = event.target.files?.[0]
+
+    //     if (file) {
+    //         try {
+    //             // Sube el archivo al bucket 'avatar' en Supabase Storage
+    //             const { data, error } = await supabase.storage
+    //                 .from('avatar')
+    //                 .upload(`avatar_${Date.now()}.png`, file)
+
+    //             if (error) {
+    //                 console.error(error.message)
+    //             } else {
+    //                 // Obtiene la URL del archivo subido y la muestra en la interfaz
+    //                 const fileUrl = `${supabase.storage}/avatar/${file}`
+    //                 setImageUrl(fileUrl)
+    //             }
+    //         } catch (error) {
+    //             console.error(error)
+    //         }
+    //     }
+    // }
 
 
     return (
@@ -167,12 +192,12 @@ function ResponsiveAppBar() {
                     </Box>
                 
                     <LoginModal isOpen={showLoginModal} onClose={handleLoginModalClose} />
-                    
+                    {/* https://phkqavjpajcvvmforhno.supabase.co/storage/v1/object/public/avatar/avatar_1697475473779.png?t=2023-10-16T17%3A22%3A19.556Z */}
                     <Box className='w-16' sx={{ flexGrow: 0 }}>
 
                         <Tooltip title='Open settings' >
                             <IconButton className='w-12' onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt={data?.user?.email} src={data?.user?.avatar ? data?.user?.avatar : nullAvatarIcon} />
+                                <Avatar alt={data?.user?.email} src={avatarUrl ? avatarUrl : nullAvatarIcon} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -191,11 +216,19 @@ function ResponsiveAppBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign='center'>{setting}</Typography>
-                                </MenuItem>
-                            ))}
+                            {settings.map((setting) => {
+                                return <AvatarMenuButton setting={setting}
+                                    logBtn={logBtn}
+                                    key={setting}
+                                    // isLoggedIn={isLoggedIn}
+                                    // logout={logOut}
+                                    handleCloseUserMenu={handleCloseUserMenu} />
+                                // return (
+                                // <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                //     <Typography textAlign='center'>{setting}</Typography>
+                                //     </MenuItem>
+                                // )
+                            })}
                         </Menu>
                     </Box>
                 </Toolbar>

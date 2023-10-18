@@ -26,7 +26,7 @@ const ProductPage: React.FC<FilterProps> = ({ changeFilter, filteredProducts }) 
     <>
       <Header />
         <SearchSection />
-      {isLoggedIn ? <p>Welcome, {data?.user.email}</p> : null}
+      {isLoggedIn ? <p>Welcome, {data?.user?.email}</p> : null}
       <Filter categories={''} status={''} filteredProducts={filteredProducts} changeFilter={changeFilter} />
       {filteredProducts.length === 0 && (
         <p>No se encontraron productos que coincidan con los filtros.</p>

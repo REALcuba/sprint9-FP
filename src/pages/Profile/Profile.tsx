@@ -7,8 +7,36 @@ import blank from '../../assets/img/blank.jpg'
 // import DonateBtn from '../../components/DonateBtn/DonateBtn'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
+// import { supabase } from '../../supabase/supabase'
+import useAuthStore from '../../store/UseStore'
+// import { useState } from 'react'
 const Profile: React.FC = () => {
+  const { avatarUrl, handleAvatarInputChange } = useAuthStore()
+
   const name = 'Angel'
+  // const handleAvatarInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0]
+
+  //   if (file) {
+  //     try {
+  //       // Sube el archivo al bucket 'avatar' en Supabase Storage
+  //       const { data, error } = await supabase.storage
+  //         .from('avatar')
+  //         .upload(`avatar_${Date.now()}.png`, file)
+
+  //       if (error) {
+  //         console.error(error.message)
+  //         return
+  //       } else {
+  //         // Obtiene la URL del archivo subido y la muestra en la interfaz
+  //         const fileUrl = `${supabase.storage}/avatar/${file}`
+  //         setImageUrl(fileUrl)
+  //       }
+  //     } catch (error) {
+  //       console.error(error)
+  //     }
+  //   }
+  // }
   return (
     <>
 
@@ -20,9 +48,12 @@ const Profile: React.FC = () => {
           <div className='profileDetails '>
             <Stack direction='row' spacing={2} className='p-2 flex justify-end items-center'>
               <h3 className='text-green-400'>Hi {name}</h3>
-              <Avatar src={blank} sx={{ width: 56, height: 56 }} />
+              <Avatar src={avatarUrl ? avatarUrl : blank} />
+              <label htmlFor="avatar">
+                <span>upload avatar</span>
+                <input id='avatar' type='file' onChange={handleAvatarInputChange}></input>
+              </label>
             </Stack>
-
             <div className='userDataWraper'>
               <div>
                 <div className='userData'>
