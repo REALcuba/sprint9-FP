@@ -1,9 +1,11 @@
-import { Route, Navigate } from 'react-router-dom'
-export const ProtectedRoute: React.FC<{ path: string, element: React.ReactNode, isLoggedIn: boolean }> = ({ path, element, isLoggedIn }) => {
-    // const navigate = useNavigate()
-    if (isLoggedIn) {
-        return <Route path={path} element={element} />
-    } else {
-        return <Navigate to="/sign-up" replace />
+
+import { Navigate } from 'react-router-dom'
+
+export const ProtectedRoute: React.FC<{ children: React.ReactNode, isLoggedIn: boolean, redirectTo?: string }> = ({ children, isLoggedIn, redirectTo = '/' }) => {
+    
+    if (!isLoggedIn) {
+        return <Navigate to={redirectTo} replace />
     }
+
+    return children
 }

@@ -37,17 +37,15 @@ const App: React.FC = () => {
     try {
       const { data: profiles,error } = await supabase
         .from('profiles')
-        .select('username')
+        .select('user_name')
       if (profiles) {
-        console.log(profiles)
+        // console.log(profiles)
       } else {
         console.log(error)
       }
 
-
-
     } catch (error) {
-      console.log(error)
+      console.error(error)
 
     }
 
@@ -86,22 +84,34 @@ const App: React.FC = () => {
     fetchProductsFromSupabase()
   }, [filter, filteredProducts])
   return (
+    <>
     <Routes>
       <Route path='/' element={<Home changeFilter={setFilter} filteredProducts={filteredProducts} />} />
-      <Route path='/sign-up' element={<SignUp />} />
-      {/* routes to protect */}
+        <Route path='/sign-up' element={<SignUp />} />
       <Route path='/products' element={<ProductPage changeFilter={setFilter} filteredProducts={filteredProducts} categories={''} status={''} />} />
       <Route path='/cart' element={<BasketPage />} />
-      <Route path='/product-info' element={<ProductInfoPage />} />
-      <Route path='/profile/*' element={
-        <ProtectedRoute path='/profile' element={<Profile />} isLoggedIn={isLoggedIn} />
-      } />
-      <Route />
-      <Route path='/donate' element={
-        <ProtectedRoute path='/donate' element={<Donate />} isLoggedIn={isLoggedIn} />
-      } />
-      <Route />
+        <Route path='/product-info' element={<ProductInfoPage />} />
+        <Route path='/profile' element={
+          <ProtectedRoute isLoggedIn={isLoggedIn}  >
+            <Profile />
+          </ProtectedRoute>
+        }>
+        </Route >
+        <Route path='/donate' element={
+          <ProtectedRoute isLoggedIn={isLoggedIn}  >
+            <Donate />
+          </ProtectedRoute>
+        }>
+        </Route >
+        {/* <Route path='/donate' element={<Donate />} /> */}
+
+        <Route path="*" element={<p>There's nothing here: 404!</p>} />
     </Routes>
+      {/* routes to protect */}
+      {/* <ProtectedRoute path='/profile' element={<Profile />} isLoggedIn={isLoggedIn} />
+      <ProtectedRoute path='/donate' element={<Donate />} isLoggedIn={isLoggedIn} /> */}
+    </>
+
   )
 }
 

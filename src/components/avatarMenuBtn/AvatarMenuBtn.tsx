@@ -19,7 +19,7 @@ interface MenuButtonProps {
 const AvatarMenuButton: React.FC<MenuButtonProps> = ({
     setting,
     // isLoggedIn,
-    logBtn,
+    // logBtn,
     // handleCloseUserMenu,
     // logout,
 }) => {
@@ -35,7 +35,7 @@ const AvatarMenuButton: React.FC<MenuButtonProps> = ({
     const actionsInSetting = () => {
         if (setting === 'Profile') {
             navigate('/profile')
-        } else if (setting === 'Donate' && !isLoggedIn) {
+        } else if (setting === 'Donate' && isLoggedIn) {
             navigate('/donate')
         } else if (setting === 'login' && !isLoggedIn) {
             // Mostrar el LoginModal cuando 'setting' es 'login' y el usuario no está logueado

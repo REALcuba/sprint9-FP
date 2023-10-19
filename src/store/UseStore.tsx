@@ -36,7 +36,7 @@ const useAuthStore = create<UserActions & UserState>()(
                         if (error) {
                             console.error('Error al registrarse:', error)
                         } else {
-                            set({ data })
+                            set({ isLoggedIn: true, data: data })
                             // set({
                             //     isLoggedIn: true, data: data,
                             // })

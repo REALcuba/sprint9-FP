@@ -11,20 +11,20 @@ const SignUp: React.FC = () => {
   // const [passwordReg, setpasswordReg] = useState('')
   // const [anthenError, setAntenError] = useState(false)
   const { isLoggedIn, signUp, logOut } = useAuthStore()
-  const [userEmail, setUserEmail] = useState('')
-  const [userPassword, setUserPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setUserEmail(e.target.value)
+    setEmail(e.target.value)
   }
-  const handleLogin = () => {
+  const handleSignUp = () => {
     if (isLoggedIn) return
-    if (userEmail === '' || userPassword === '') {
+    if (email === '' || password === '') {
       alert(`Please enter a valid: username and password`)
       console.log('Please enter a username')
 
     } else {
       // Llama a la función de login proporcionada por el hook
-      signUp(userEmail, userPassword)
+      signUp(email, password)
     }
   }
 
@@ -34,7 +34,7 @@ const SignUp: React.FC = () => {
   }
   const Register: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
-    handleLogin()
+    handleSignUp()
     // fetch('http://localhost:5000/login', {
     //   method: 'POST',
     //   body: JSON.stringify({
@@ -58,14 +58,14 @@ const SignUp: React.FC = () => {
   }
 
   return (
-    <div className='loginform d-flex justify-content-center align-items-center'>
+    <div className='flex justify-center align-center gap 2'>
       <form className='loginmember d-flex flex-column' onSubmit={Register}>
         <h1>Sign up</h1>
 
         <input
           className='form-control'
           type='text'
-          placeholder='username'
+          placeholder='example@example.com'
           required
           onChange={handleChange}
         />
@@ -76,11 +76,11 @@ const SignUp: React.FC = () => {
           placeholder='password'
           required
           onChange={(e) => {
-            setUserPassword(e.target.value)
+            setPassword(e.target.value)
           }}
         />
 
-        <button type='submit' onClick={isLoggedIn ? handleLogout : handleLogin}>
+        <button type='submit' onClick={isLoggedIn ? handleLogout : handleSignUp}>
           {isLoggedIn ? 'Logout' : 'Login'}
         </button>
         {isLoggedIn
