@@ -42,7 +42,6 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
     const handleExpandClick = () => {
         setIsExpanded(!isExpanded)
     }
-    console.log(isExpanded)
 
     const ExpandButton = () => (
         <button
@@ -73,8 +72,6 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
         handleCardViewBtnClick()
     }
 
-
-
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
@@ -83,14 +80,10 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
                 !cardRef.current.contains(event.target)
             ) {
                 setIsExpanded(false)
-                // console.log(isExpanded)
-
             }
         }
 
-
         window.addEventListener('click', handleClickOutside)
-        // window.addEventListener('dblclick', handleClickNavigate)
 
         return () => {
             window.removeEventListener('click', handleClickOutside)
@@ -146,8 +139,6 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
             {isExpanded && (
                 <div className="absolute h-72 inset-0 bg-gray-100 opacity-80 p-4"
                     onClick={handleExpandClick} 
-                    // onDoubleClick={handleCardDoubleClick}
-
                 >
                     <CardContent>
                     <Typography paragraph>Method:</Typography>

@@ -5,18 +5,9 @@ import { supabase } from '../supabase/supabase'
 import type { } from '@redux-devtools/extension'
 // import { User } from '@supabase/supabase-js'
 import { UserState } from '../types/types'
-// import { useNavigate } from 'react-router-dom'
-interface UserActions {
-// user: User | null;
-    password: string | number | null;
-    email: string | number | null;
-    signUp: (email: string, password: string) => Promise<void>;
-    logIn: (email: string, password: string) => Promise<void>;
-    logOut: () => Promise<void>;
-    handleAvatarInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    // data?: unknown;
+// import { Database } from '../types/supabase'
+import { UserActions } from '../types/types'
 
-}
 
 const useAuthStore = create<UserActions & UserState>()(
     devtools(
@@ -37,9 +28,7 @@ const useAuthStore = create<UserActions & UserState>()(
                             console.error('Error al registrarse:', error)
                         } else {
                             set({ isLoggedIn: true, data: data })
-                            // set({
-                            //     isLoggedIn: true, data: data,
-                            // })
+
                         }
                     } catch (error) {
                         console.log(error)
@@ -98,6 +87,37 @@ const useAuthStore = create<UserActions & UserState>()(
                         }
                     }
                 },
+                fetchProfiles: async () => {
+                    try {
+                        const { data: profile, error } = await supabase
+                            .from('profiles')
+                            .select('*')
+                        if (error) {
+                            console.error(error)
+                        } else {
+                            set({ data: profile })
+
+                        }
+                    } catch (error) {
+                        console.log(error)
+                    }
+                },
+                addNewProduct: async (product) => {
+                    try {
+                        const { data, error } = await supabase
+                            .from('products')
+                            .insert([product])
+                            .select()
+                        if (error) {
+                            console.error(error)
+                        } else {
+                            set({ data: data })
+                        }
+                    } catch (error) {
+                        console.log(error)
+                    }
+                },
+
             }),
 
             {

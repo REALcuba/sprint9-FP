@@ -33,59 +33,27 @@ const AvatarMenuButton: React.FC<MenuButtonProps> = ({
 
     }
     const actionsInSetting = () => {
-        if (setting === 'Profile') {
-            navigate('/profile')
-        } else if (setting === 'Donate' && isLoggedIn) {
-            navigate('/donate')
+        if (setting === 'Profile' && !isLoggedIn) {
+            alert('please Login')
+            setShowLoginModal(true)
+
+            // navigate('/profile')
+        } else if (setting === 'Donate' && !isLoggedIn) {
+            alert('please Login')
+            setShowLoginModal(true)
+        // navigate('/donate')
         } else if (setting === 'login' && !isLoggedIn) {
             // Mostrar el LoginModal cuando 'setting' es 'login' y el usuario no está logueado
             setShowLoginModal(true)
-        } else {
+
+        } else if (setting === 'logOut' && isLoggedIn) {
             logOut()
-            navigate('/')
+            navigate(`/`)
+        } else {
+            navigate(`/${setting}`)
         }
     }
 
-    // const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {
-    //     className: 'text-green-300 my-2 flex',
-    //     // sx: sx,
-    //     onClick: redirectToPage,
-    //     children: null,
-
-
-    // }
-
-    // if (settings === 'cart') {
-    //     buttonProps.children = (
-    //         <>
-
-    //             <ShoppingCartOutlinedIcon />
-    //             {settings}
-
-    //         </>
-    //     )
-    // } else if (settings === 'login' && !isLoggedIn) {
-    //     // buttonProps.component = 'button'
-    //     buttonProps.onClick = handleLoginModalOpen
-    //     buttonProps.children = logBtn
-    // } else if (settings === 'login' && isLoggedIn) {
-    //     // buttonProps.component = 'button'
-    //     buttonProps.onClick = logout
-    //     buttonProps.children = logBtn
-    // } else {
-    //     // buttonProps.component = 'button'
-    //     buttonProps.children =
-    //         settings
-
-    // }
-
-
-    // Actualiza el valor de toRef cuando cambia la ubicación
-    // useEffect(() => {
-    //     toRef.current = location.pathname
-    // }, [location.pathname])
-
-    // return <Button {...buttonProps} />
     return (
         <>
 

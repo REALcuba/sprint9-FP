@@ -71,6 +71,7 @@ function Searchbar ({ placeholder }: { placeholder: string }): JSX.Element {
             <input
               className='form-input rounded-full border-white focus:border-none px-2 peer h-full w-full outline-none text-sm text-gray-700 pr-2'
               type='search'
+              role='search'
               placeholder={placeholder}
               onChange={handleSearch}
             />
@@ -81,18 +82,7 @@ function Searchbar ({ placeholder }: { placeholder: string }): JSX.Element {
             >Search
             </button>
           </div>
-          {/* <div
-            className='absolute rigth-0 w-6  justify-center h-6 rounded-md'
-          // onClick={handleCancelSearch}
-          >
-            <img className='relative rounded-md ' src={X} alt='' />
-          </div> */}
-          {/* <button
-            className='searchBarBtn Btn focus-within:shadow-lg focus-within:shadow-green-500'
-            value='search '
-          // onClick={handleClick}
-          >Search
-          </button> */}
+
         </label>
       </form>
     </div>

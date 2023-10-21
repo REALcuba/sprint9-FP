@@ -56,7 +56,7 @@ const App: React.FC = () => {
 
       const { data: products, error } = await supabase
         .from('products')
-        .select('item_name')
+        .select('product_name')
       if (products) {
         console.log(products)
       } else {

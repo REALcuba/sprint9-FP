@@ -11,9 +11,9 @@ import Header from '../../components/Header/Header'
 import useAuthStore from '../../store/UseStore'
 // import { useState } from 'react'
 const Profile: React.FC = () => {
-  const { avatarUrl, handleAvatarInputChange } = useAuthStore()
+  const { avatarUrl, handleAvatarInputChange, data } = useAuthStore()
 
-  const name = 'Angel'
+  // const name = 'Angel'
   // const handleAvatarInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
   //   const file = event.target.files?.[0]
 
@@ -47,7 +47,7 @@ const Profile: React.FC = () => {
         <section className='bg-themeColor  flex flex-col '>
           <div className='profileDetails '>
             <Stack direction='row' spacing={2} className='p-2 flex justify-end items-center'>
-              <h3 className='text-green-400'>Hi {name}</h3>
+              <h3 className='text-green-400'>Hi {data?.session?.user.user_metadata.user_name}</h3>
               <Avatar src={avatarUrl ? avatarUrl : blank} />
               <label htmlFor="avatar">
                 <span>upload avatar</span>

@@ -1,5 +1,5 @@
 import { Session, User } from "@supabase/supabase-js"
-
+import { Database } from "../types/supabase"
 
 export interface buttonProps {
   direction: string
@@ -23,6 +23,17 @@ export type HomeProps = {
 export interface FilterProps extends HomeProps {
   categories: string,
   status: string,
+}
+export interface UserActions {
+  // user: User | null;
+  password: string | number | null;
+  email: string | number | null;
+  signUp: (email: string, password: string) => Promise<void>;
+  logIn: (email: string, password: string) => Promise<void>;
+  logOut: () => Promise<void>;
+  handleAvatarInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  addNewProduct: (product: Database['public']['Tables']['products']['Insert']) => Promise<void>;    // data?: unknown;
+  fetchProfiles: () => Promise<void>;
 }
 // type UserData = {
 //   id: string;
