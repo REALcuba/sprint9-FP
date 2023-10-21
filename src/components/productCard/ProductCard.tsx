@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import { red } from '@mui/material/colors'
+import { grey, red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -15,6 +15,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
+import { Icon } from '@mui/material'
 
 // interface ExpandButtonProps extends IconButtonProps {
 //     expand: boolean;
@@ -43,17 +44,7 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
         setIsExpanded(!isExpanded)
     }
 
-    const ExpandButton = () => (
-        <button
-            className={`ml-auto px-2 py-1 bg-gray-300 rounded-lg focus:outline-none hover:bg-gray-400 transition-colors ${isExpanded ? 'transform rotate-180' : ''
-                }`}
-            onClick={handleExpandClick}
-            aria-label="show more"
-        >
-            <ExpandMoreIcon />
-        </button>
-
-    )
+   
     const handleCardViewBtnClick = () => {
         // if (!isExpanded) {
         //     console.log(cardRef)
@@ -130,8 +121,12 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
                 <IconButton aria-label="share">
                     <ShareIcon />
                 </IconButton>
-                <IconButton>
-                    {ExpandButton()}
+                <IconButton onClick={handleExpandClick} className={`ml-auto px-2 py-1  rounded-lg focus:outline-none hover:bg-gray-400 transition-colors ${isExpanded ? 'transform rotate-180' : ''
+                    }`} aria-label="show more"
+                    sx={{ bgcolor: grey[300] }}
+                    >
+                    <ExpandMoreIcon />
+                    {/* {ExpandButton()} */}
                 </IconButton>
 
             </CardActions>

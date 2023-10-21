@@ -3,7 +3,7 @@ import HeaderTest from '../../components/Header/Header'
 import Searchbar from '../../components/SearchBar/SearchBar'
 import ProductCard from '../../components/productCard/ProductCard'
 import useAuthStore from '../../store/UseStore'
-import { type HomeProps } from '../../types/types'
+import { ProductRow, type HomeProps } from '../../types/types'
 
 // import SearchSection from '../../components/SearchSection/SearchSection'
 // import { arrayOfObjects } from "../../components/Basket/Basketitem"
@@ -41,7 +41,7 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
   //     // Llama a la función de login proporcionada por el hook
   //     login(username, userPassword)
 
-    
+
   //   }
   // }
 
@@ -49,7 +49,7 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
   //   // Llama a la función de logout proporcionada por el hook
   //   logout()
   // }
-  console.log(data)
+  // console.log(data)
 
   return (
     <>
@@ -63,12 +63,12 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
       {/* <section className='flex flex-wrap gap-2 m-2 right w-60'> */}
       <section className='flex justify-end p-2'>
         <Grid container spacing={1} columns={4} maxWidth={"80%"} alignContent={'end'} margin={2}>
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product: ProductRow) => (
 
 
             <Grid key={product.id} className='p-2 '>
 
-            <ProductCard key={product.id} img={product.image} itemName={product.itemName} ownerName={product.ownerName} pickupAddress={product.pickupAddress} />
+              <ProductCard key={product.id} img={''} itemName={product.product_name} ownerName={product.product_name} pickupAddress={product.pick_up_address ?? 'No address available'} />
           </Grid>
 
         ))}

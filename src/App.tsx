@@ -8,66 +8,31 @@ import Profile from './pages/Profile/Profile'
 import Donate from './pages/Donate/Donate'
 import BasketPage from './pages/cart/CartPage'
 import ProductInfoPage from './pages/productInfoPage/ProductInfoPage'
-import ProductList from './components/Basket/ProductList'
+// import ProductList from './components/Basket/ProductList'
 import { useEffect, useState } from 'react'
-import { type productsListProps, type FilterProps } from './types/types'
-import { supabase } from './supabase/supabase'
+import { type FilterProps, type ProductRow } from './types/types'
+// import { supabase } from './supabase/supabase'
 import useAuthStore from './store/UseStore'
 import { ProtectedRoute } from './components/protectedRoute/ProtectedRoute'
+// import { Database } from './types/supabase'
 
-// interface FilterProps {
-//   categories: string;
-//   status: string;
-// }
 const App: React.FC = () => {
   // const { user } = useAuthStore()
-  const { isLoggedIn } = useAuthStore()
+  const { isLoggedIn, products, data, fetchProductsFromSupabase } = useAuthStore()
+  // const { productsFromSupabase, setProductsFromSupabase } = useState([])
   const [filter, setFilter] = useState<FilterProps>({
     categories: "All",
     status: "All",
     changeFilter: () => { },
-    filteredProducts: []
+    filteredProducts: [],
+    // products: products
   })
 
   const lowercaseStatusFilter = filter.status.toLowerCase()
   const lowercaseCategoriesFilter = filter.categories.toLowerCase()
 
 
-  const fetchUsersFromSupabase = async () => {
-    try {
-      const { data: profiles,error } = await supabase
-        .from('profiles')
-        .select('user_name')
-      if (profiles) {
-        // console.log(profiles)
-      } else {
-        console.log(error)
-      }
-
-    } catch (error) {
-      console.error(error)
-
-    }
-
-  }
-  fetchUsersFromSupabase()
-  const fetchProductsFromSupabase = async () => {
-    try {
-
-      const { data: products, error } = await supabase
-        .from('products')
-        .select('product_name')
-      if (products) {
-        console.log(products)
-      } else {
-        console.log(error)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const filterProducts = (productListProps: productsListProps): productsListProps => {
+  const filterProducts = (productListProps: ProductRow[]): ProductRow[] => {
     return productListProps.filter((product) => {
       const productStatus = product.status.toLowerCase()
       const productCategory = product.category.toLowerCase()
@@ -78,18 +43,26 @@ const App: React.FC = () => {
       return statusMatch && categoryMatch
     })
   }
-  const filteredProducts = filterProducts(ProductList)
-
+  const filteredProducts = filterProducts(products)
+  // const handleProducts = () => {
+  //   setProductsFromSupabase(products)
+  // }
   useEffect(() => {
-    fetchProductsFromSupabase()
-  }, [filter, filteredProducts])
+    const fetchData = async () => {
+      if (products.length === 0) {
+        await fetchProductsFromSupabase()
+      }
+    }
+    fetchData()
+    // fetchProductsFromSupabase()
+  }, [fetchProductsFromSupabase, filter, filteredProducts, products.length])
   return (
     <>
     <Routes>
-      <Route path='/' element={<Home changeFilter={setFilter} filteredProducts={filteredProducts} />} />
+        <Route path='/' element={<Home changeFilter={setFilter} filteredProducts={filteredProducts} />} />
         <Route path='/sign-up' element={<SignUp />} />
-      <Route path='/products' element={<ProductPage changeFilter={setFilter} filteredProducts={filteredProducts} categories={''} status={''} />} />
-      <Route path='/cart' element={<BasketPage />} />
+        <Route path='/products' element={<ProductPage changeFilter={setFilter} filteredProducts={filteredProducts} categories={''} status={''} />} />
+        <Route path='/cart' element={<BasketPage />} />
         <Route path='/product-info' element={<ProductInfoPage />} />
         <Route path='/profile' element={
           <ProtectedRoute isLoggedIn={isLoggedIn}  >
@@ -103,13 +76,13 @@ const App: React.FC = () => {
           </ProtectedRoute>
         }>
         </Route >
-        {/* <Route path='/donate' element={<Donate />} /> */}
 
         <Route path="*" element={<p>There's nothing here: 404!</p>} />
     </Routes>
-      {/* routes to protect */}
-      {/* <ProtectedRoute path='/profile' element={<Profile />} isLoggedIn={isLoggedIn} />
-      <ProtectedRoute path='/donate' element={<Donate />} isLoggedIn={isLoggedIn} /> */}
+      <div>
+        {isLoggedIn ? <p>Welcome, {data?.user?.email}</p> : null}
+      </div>
+
     </>
 
   )

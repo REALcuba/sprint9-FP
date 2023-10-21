@@ -25,7 +25,7 @@ function Searchbar ({ placeholder }: { placeholder: string }): JSX.Element {
     //   console.log(newFilter)
     // }
   }
-  console.log(searchValue)
+  // console.log(searchValue)
 
   // interface inputSearchProps {
   //   handleCancelSearch: () => void
@@ -72,6 +72,7 @@ function Searchbar ({ placeholder }: { placeholder: string }): JSX.Element {
               className='form-input rounded-full border-white focus:border-none px-2 peer h-full w-full outline-none text-sm text-gray-700 pr-2'
               type='search'
               role='search'
+              value={searchValue}
               placeholder={placeholder}
               onChange={handleSearch}
             />

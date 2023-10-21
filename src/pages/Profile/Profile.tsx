@@ -9,34 +9,39 @@ import { Link } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 // import { supabase } from '../../supabase/supabase'
 import useAuthStore from '../../store/UseStore'
+import { supabase } from '../../supabase/supabase'
+// import { useState } from 'react'
 // import { useState } from 'react'
 const Profile: React.FC = () => {
-  const { avatarUrl, handleAvatarInputChange, data } = useAuthStore()
-
+  const { data } = useAuthStore()
+  // const { avatarUrl, setAvatarUrl } = useState(blank)
+  let avatarUrl = ""
   // const name = 'Angel'
-  // const handleAvatarInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0]
+  const handleAvatarInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+    if (file) {
+      try {
+        // Sube el archivo al bucket 'avatar' en Supabase Storage
+        const { data, error } = await supabase.storage
+          .from('avatars')
+          .upload(`avatar_${Date.now()}.png`, file)
 
-  //   if (file) {
-  //     try {
-  //       // Sube el archivo al bucket 'avatar' en Supabase Storage
-  //       const { data, error } = await supabase.storage
-  //         .from('avatar')
-  //         .upload(`avatar_${Date.now()}.png`, file)
+          if (error) {
+            console.error(error.message)
+            return
+          }
+        avatarUrl = URL.createObjectURL(file)
+        // Obtiene la URL del archivo subido y la muestra en la interfaz
+        // const fileUrl = `${supabase.storage}/avatar/${file}`
+        return avatarUrl
 
-  //       if (error) {
-  //         console.error(error.message)
-  //         return
-  //       } else {
-  //         // Obtiene la URL del archivo subido y la muestra en la interfaz
-  //         const fileUrl = `${supabase.storage}/avatar/${file}`
-  //         setImageUrl(fileUrl)
-  //       }
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   }
-  // }
+
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
   return (
     <>
 
@@ -48,6 +53,7 @@ const Profile: React.FC = () => {
           <div className='profileDetails '>
             <Stack direction='row' spacing={2} className='p-2 flex justify-end items-center'>
               <h3 className='text-green-400'>Hi {data?.session?.user.user_metadata.user_name}</h3>
+              {/* <Avatar src={avatarUrl ? avatarUrl : blank} /> */}
               <Avatar src={avatarUrl ? avatarUrl : blank} />
               <label htmlFor="avatar">
                 <span>upload avatar</span>
@@ -58,7 +64,7 @@ const Profile: React.FC = () => {
               <div>
                 <div className='userData'>
 
-                  <h3>lorem</h3>
+                  <h3>{data?.session?.user.user_metadata.user_name}</h3>
                   <div>bio</div>
                 </div>
               </div>

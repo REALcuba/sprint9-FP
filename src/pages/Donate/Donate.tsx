@@ -5,7 +5,7 @@ import useAuthStore from '../../store/UseStore'
 // import { Link } from "react-router-dom";
 
 const Donate: React.FC = () => {
-  const { addNewProduct } = useAuthStore()
+  const { addNewProduct, handleProductImageUpload } = useAuthStore()
   //   const [productInfo, setProductInfo] = useState("");
   const [productName, setProductName] = useState('')
   const [status, setStatus] = useState('')
@@ -123,6 +123,9 @@ const Donate: React.FC = () => {
             // ref={selectedFile}
             placeholder='sube tus fotos'
             required
+            onChange={(e) => {
+              handleProductImageUpload(e)
+            }}
           // onChange={(event: ChangeEventHandler) => {
           //   setPictures(event.target.value)
           //   console.log(pictures)

@@ -15,10 +15,23 @@ export type productsListProps = {
   status: string
 }[]
 
+export interface ProductRow {
+  user_name: string
+  ownerName: string
+  pickupAddress: string
+  category: string;
+  id?: string;
+  images: string | null;
+  pick_up_address?: string | null;
+  product_name: string;
+  status: string;
+  description: string;
+}
 export type HomeProps = {
+  // products: ProductRow[];
   changeFilter: (callback: (prevFilter: FilterProps) => FilterProps) => void;
 
-  filteredProducts: productsListProps;
+  filteredProducts:  ProductRow[];
 };
 export interface FilterProps extends HomeProps {
   categories: string,
@@ -31,9 +44,11 @@ export interface UserActions {
   signUp: (email: string, password: string) => Promise<void>;
   logIn: (email: string, password: string) => Promise<void>;
   logOut: () => Promise<void>;
-  handleAvatarInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleAvatarInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addNewProduct: (product: Database['public']['Tables']['products']['Insert']) => Promise<void>;    // data?: unknown;
   fetchProfiles: () => Promise<void>;
+  handleProductImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
+  fetchProductsFromSupabase: () => Promise<void>;
 }
 // type UserData = {
 //   id: string;
@@ -102,8 +117,10 @@ export type DataProps = {
 export interface UserState {
   isLoggedIn: boolean;
   // user: User | null;
+  products: ProductRow[]
   avatarUrl: string | null;
   password: string | number | null;
   email: string | number | null;
   data?: DataProps;
+  productImageUrl: string | null;
 }

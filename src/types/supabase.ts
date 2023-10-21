@@ -13,7 +13,7 @@ export interface Database {
         Row: {
           category: string
           // created_at: string
-          // id: string
+          id?: string
           images: string | null
           // user_name: string
           pick_up_address: string | null
@@ -25,7 +25,7 @@ export interface Database {
         Insert: {
           category: string
           // created_at?: string
-          // id: string
+          id?: string
           images?: string | null
           // user_name: string
           pick_up_address?: string | null
@@ -38,7 +38,7 @@ export interface Database {
         Update: {
           category?: string
           // created_at?: string
-          // id?: string
+          id?: string
           images?: string | null
           // user_name?: string
           pick_up_address?: string | null

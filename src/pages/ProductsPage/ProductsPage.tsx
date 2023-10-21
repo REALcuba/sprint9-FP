@@ -25,10 +25,10 @@ const ProductPage: React.FC<FilterProps> = ({ changeFilter, filteredProducts }) 
 
               <ProductCard 
               key={product.id} 
-              img={product.image}
-              itemName={product.itemName}
+                img={product.images}
+                itemName={product.user_name}
               ownerName={product.ownerName} 
-              pickupAddress={product.pickupAddress} />
+              pickupAddress={product.description} />
             </Grid>
 
           ))}
