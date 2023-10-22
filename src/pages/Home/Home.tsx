@@ -23,7 +23,7 @@ import Filter from '../../components/filter/Filter'
 //   session: Session;
 
 // }
-const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
+const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts, noImg }) => {
   const { isLoggedIn, data } = useAuthStore()
   // const { isLoggedIn, user, login, logout } = useAuthStore()
   // const [username, setUsername] = useState('')
@@ -56,7 +56,7 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
       <HeaderTest />
       <Searchbar placeholder='Search' />
       {isLoggedIn ? <p>Welcome, {data?.user?.email}</p> : null}
-      <Filter changeFilter={changeFilter} categories={''} status={''} filteredProducts={filteredProducts} />
+      <Filter changeFilter={changeFilter} category={''} status={''} filteredProducts={filteredProducts} />
       {filteredProducts.length === 0 && (
         <p>No se encontraron productos que coincidan con los filtros.</p>
       )}
@@ -68,7 +68,7 @@ const Home: React.FC<HomeProps> = ({ changeFilter, filteredProducts }) => {
 
             <Grid key={product.id} className='p-2 '>
 
-              <ProductCard key={product.id} img={''} itemName={product.product_name} ownerName={product.product_name} pickupAddress={product.pick_up_address ?? 'No address available'} />
+              <ProductCard key={product.id} img={product.images ? product.images : noImg} itemName={product.product_name} ownerName={product.product_name} pickupAddress={product.pick_up_address ?? 'No address available'} />
           </Grid>
 
         ))}

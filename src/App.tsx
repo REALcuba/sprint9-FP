@@ -21,7 +21,7 @@ const App: React.FC = () => {
   const { isLoggedIn, products, data, fetchProductsFromSupabase } = useAuthStore()
   // const { productsFromSupabase, setProductsFromSupabase } = useState([])
   const [filter, setFilter] = useState<FilterProps>({
-    categories: "All",
+    category: "All",
     status: "All",
     changeFilter: () => { },
     filteredProducts: [],
@@ -29,16 +29,18 @@ const App: React.FC = () => {
   })
 
   const lowercaseStatusFilter = filter.status.toLowerCase()
-  const lowercaseCategoriesFilter = filter.categories.toLowerCase()
+  const lowercaseCategoriesFilter = filter.category.toLowerCase()
+  const noImg = 'https://imagenesparaperfildewasap.com/wp-content/uploads/no-hay-foto-2.png'
 
 
-  const filterProducts = (productListProps: ProductRow[]): ProductRow[] => {
-    return productListProps.filter((product) => {
+  const filterProducts = (products: ProductRow[]): ProductRow[] => {
+    return products.filter((product) => {
       const productStatus = product.status.toLowerCase()
       const productCategory = product.category.toLowerCase()
+      console.log(productCategory)
 
       const statusMatch = filter.status === "All" || productStatus === lowercaseStatusFilter
-      const categoryMatch = filter.categories === "All" || productCategory === lowercaseCategoriesFilter
+      const categoryMatch = filter.category === "All" || productCategory === lowercaseCategoriesFilter
 
       return statusMatch && categoryMatch
     })
@@ -59,9 +61,9 @@ const App: React.FC = () => {
   return (
     <>
     <Routes>
-        <Route path='/' element={<Home changeFilter={setFilter} filteredProducts={filteredProducts} />} />
+        <Route path='/' element={<Home changeFilter={setFilter} filteredProducts={filteredProducts} noImg={noImg} />} />
         <Route path='/sign-up' element={<SignUp />} />
-        <Route path='/products' element={<ProductPage changeFilter={setFilter} filteredProducts={filteredProducts} categories={''} status={''} />} />
+        <Route path='/products' element={<ProductPage noImg={noImg} changeFilter={setFilter} filteredProducts={filteredProducts} />} />
         <Route path='/cart' element={<BasketPage />} />
         <Route path='/product-info' element={<ProductInfoPage />} />
         <Route path='/profile' element={

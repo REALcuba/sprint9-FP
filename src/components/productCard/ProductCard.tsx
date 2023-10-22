@@ -15,7 +15,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
-import { Icon } from '@mui/material'
 
 // interface ExpandButtonProps extends IconButtonProps {
 //     expand: boolean;
@@ -82,6 +81,7 @@ export default function ProductCard({ img, itemName, ownerName, pickupAddress }:
     }, [])
 
     return (
+     
         <Card sx={{ maxWidth: 300, minWidth: 250, position: 'relative' }} ref={(ref) => {
             if (ref) {
                 cardRef.current = ref

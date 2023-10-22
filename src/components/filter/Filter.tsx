@@ -5,7 +5,7 @@ const Filter: React.FC<FilterProps> = ({ changeFilter }) => {
 
         changeFilter((prevFilter) => ({
             ...prevFilter,
-            categories: selectedCategory,
+            category: selectedCategory,
         }))
     }
 
@@ -30,8 +30,8 @@ const Filter: React.FC<FilterProps> = ({ changeFilter }) => {
                         onChange={handleChangeCategory}
                     >
                         <option value="All">All</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Clothes">Clothes</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Clothe">Clothe</option>
                     </select>
                 </div>
                 <div className="flex justify-center gap-4">

@@ -30,11 +30,13 @@ export interface ProductRow {
 export type HomeProps = {
   // products: ProductRow[];
   changeFilter: (callback: (prevFilter: FilterProps) => FilterProps) => void;
-
+  noImg: string;
   filteredProducts:  ProductRow[];
 };
-export interface FilterProps extends HomeProps {
-  categories: string,
+export interface FilterProps {
+  changeFilter: (callback: (prevFilter: FilterProps) => FilterProps) => void;
+  filteredProducts: ProductRow[];
+  category: string,
   status: string,
 }
 export interface UserActions {
