@@ -1,15 +1,15 @@
 // import React, { useEffect, useRef } from 'react'
-import Button from '@mui/material/Button'
+// import Button from '@mui/material/Button'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { useNavigate } from 'react-router-dom'
 import useAuthStore from '../../store/UseStore'
 
 interface PageButtonProps {
     page: string;
-    isLoggedIn: boolean;
+    // isLoggedIn: boolean;
     logBtn: string | null;
     handleLoginModalOpen: () => void;
-    logout: () => void;
+    // logout: () => void;
 
 }
 
@@ -18,63 +18,44 @@ const NavMenuButton: React.FC<PageButtonProps> = ({
     // isLoggedIn,
     logBtn,
     handleLoginModalOpen,
-    logout,
+    // logout,
 }) => {
+    const navigate = useNavigate()
     const { isLoggedIn, logOut } = useAuthStore()
-
-    const navigate = useNavigate() // Obtiene la ubicación actual
-    const redirectToPage = () => {
+    const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {
+        className: 'tex ',
+        children: null,
+        onClick: () => {
         if (page === 'cart') {
             navigate('/cart')
+        } else if (page === 'products') {
+            navigate('/products')
         } else if (page === 'login' && !isLoggedIn) {
             handleLoginModalOpen()
-        } else if (page === 'login' && isLoggedIn) {
-            logout()
-        } else {
-            navigate(`/${page}`)
+        } else if (page === 'logOut' && isLoggedIn) {
+            logOut()
         }
-    }
-
-    const buttonProps: React.ButtonHTMLAttributes<HTMLButtonElement> = {
-        className: 'text-green-300 my-2 flex',
-        // sx: sx,
-        onClick: redirectToPage,
-        children: null,
-
-
+        },
     }
 
     if (page === 'cart') {
         buttonProps.children = (
             <>
-
                 <ShoppingCartOutlinedIcon />
-                {page}
-
+                {page.toUpperCase()}
             </>
         )
     } else if (page === 'login' && !isLoggedIn) {
-        // buttonProps.component = 'button'
-        buttonProps.onClick = handleLoginModalOpen
-        buttonProps.children = logBtn
+        buttonProps.children = logBtn?.toUpperCase()
     } else if (page === 'login' && isLoggedIn) {
-        // buttonProps.component = 'button'
-        buttonProps.onClick = logOut
-        buttonProps.children = logBtn
+        buttonProps.children = logBtn?.toUpperCase()
     } else {
-        // buttonProps.component = 'button'
-        buttonProps.children =
-            page 
-
+        // Páginas distintas de 'cart', 'product', y 'login'
+        buttonProps.children = page.toUpperCase()
     }
 
-
-    // Actualiza el valor de toRef cuando cambia la ubicación
-    // useEffect(() => {
-    //     toRef.current = location.pathname
-    // }, [location.pathname])
-
-    return <Button {...buttonProps} />
+    return <button {...buttonProps} />
 }
 
 export default NavMenuButton
+

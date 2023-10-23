@@ -46,7 +46,7 @@ export interface UserActions {
   signUp: (email: string, password: string) => Promise<void>;
   logIn: (email: string, password: string) => Promise<void>;
   logOut: () => Promise<void>;
-  handleAvatarInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // handleAvatarInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addNewProduct: (product: Database['public']['Tables']['products']['Insert']) => Promise<void>;    // data?: unknown;
   fetchProfiles: () => Promise<void>;
   handleProductImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
@@ -125,4 +125,5 @@ export interface UserState {
   email: string | number | null;
   data?: DataProps;
   productImageUrl: string | null;
+  profile: []
 }

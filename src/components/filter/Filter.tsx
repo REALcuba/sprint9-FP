@@ -32,6 +32,7 @@ const Filter: React.FC<FilterProps> = ({ changeFilter }) => {
                         <option value="All">All</option>
                         <option value="Electronic">Electronic</option>
                         <option value="Clothe">Clothe</option>
+                        <option value="Furniture">Furniture</option>
                     </select>
                 </div>
                 <div className="flex justify-center gap-4">

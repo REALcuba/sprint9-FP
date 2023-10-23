@@ -1,5 +1,3 @@
-// import { useState } from 'react'
-// import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import SignUp from './pages/SignUp'
@@ -8,18 +6,13 @@ import Profile from './pages/Profile/Profile'
 import Donate from './pages/Donate/Donate'
 import BasketPage from './pages/cart/CartPage'
 import ProductInfoPage from './pages/productInfoPage/ProductInfoPage'
-// import ProductList from './components/Basket/ProductList'
 import { useEffect, useState } from 'react'
 import { type FilterProps, type ProductRow } from './types/types'
-// import { supabase } from './supabase/supabase'
 import useAuthStore from './store/UseStore'
 import { ProtectedRoute } from './components/protectedRoute/ProtectedRoute'
-// import { Database } from './types/supabase'
 
 const App: React.FC = () => {
-  // const { user } = useAuthStore()
   const { isLoggedIn, products, data, fetchProductsFromSupabase } = useAuthStore()
-  // const { productsFromSupabase, setProductsFromSupabase } = useState([])
   const [filter, setFilter] = useState<FilterProps>({
     category: "All",
     status: "All",
@@ -37,7 +30,6 @@ const App: React.FC = () => {
     return products.filter((product) => {
       const productStatus = product.status.toLowerCase()
       const productCategory = product.category.toLowerCase()
-      console.log(productCategory)
 
       const statusMatch = filter.status === "All" || productStatus === lowercaseStatusFilter
       const categoryMatch = filter.category === "All" || productCategory === lowercaseCategoriesFilter
@@ -46,17 +38,9 @@ const App: React.FC = () => {
     })
   }
   const filteredProducts = filterProducts(products)
-  // const handleProducts = () => {
-  //   setProductsFromSupabase(products)
-  // }
+  
   useEffect(() => {
-    const fetchData = async () => {
-      if (products.length === 0) {
-        await fetchProductsFromSupabase()
-      }
-    }
-    fetchData()
-    // fetchProductsFromSupabase()
+    
   }, [fetchProductsFromSupabase, filter, filteredProducts, products.length])
   return (
     <>

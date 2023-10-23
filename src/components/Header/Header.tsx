@@ -18,7 +18,7 @@ import nullAvatarIcon from '../../assets/img/blank.jpg'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import LoginModal from '../../pages/Login/LoginModal'
 import useAuthStore from '../../store/UseStore'
-import PageButton from './NavMenuButton'
+import NavMenuButton from './NavMenuButton'
 import AvatarMenuButton from '../avatarMenuBtn/AvatarMenuBtn'
 // import { supabase } from '../../supabase/supabase'
 // import { useRef } from 'react'
@@ -26,7 +26,7 @@ import AvatarMenuButton from '../avatarMenuBtn/AvatarMenuBtn'
 // const [user, setUser]=
 
 function ResponsiveAppBar() {
-    const { isLoggedIn, logOut, data, avatarUrl, } = useAuthStore()
+    const { isLoggedIn, data, avatarUrl, } = useAuthStore()
     const logBtn = isLoggedIn ? 'logOut' : 'login'
     const pages = ['products', 'cart', logBtn]
     const settings = ['Profile', 'Donate', logBtn]
@@ -175,19 +175,19 @@ function ResponsiveAppBar() {
                     </Box>
                     <Box className="justify-end  grow-1 md:flex hidden text-gray-300"
                         sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}   >
-                        <div>
+
                             {pages.map((page) => (
-                                <PageButton
+                                <NavMenuButton
                                     key={page}
                                     page={page}
-                                    isLoggedIn={isLoggedIn}
+                                    // isLoggedIn={isLoggedIn}
                                     logBtn={logBtn}
                                     handleLoginModalOpen={handleLoginModalOpen}
-                                    logout={logOut}
+                                    // logout={logOut}
                                 // sx={{ my: 2, display: 'flex', flexGrow: 1 }} // Pasamos sx como prop al componente PageButton
                                 />
                             ))}
-                        </div>
+
 
                     </Box>
                 

@@ -34,7 +34,7 @@ const Profile: React.FC = () => {
         avatarUrl = URL.createObjectURL(file)
         // Obtiene la URL del archivo subido y la muestra en la interfaz
         // const fileUrl = `${supabase.storage}/avatar/${file}`
-        return avatarUrl
+        return 
 
 
       } catch (error) {
@@ -53,7 +53,6 @@ const Profile: React.FC = () => {
           <div className='profileDetails '>
             <Stack direction='row' spacing={2} className='p-2 flex justify-end items-center'>
               <h3 className='text-green-400'>Hi {data?.session?.user.user_metadata.user_name}</h3>
-              {/* <Avatar src={avatarUrl ? avatarUrl : blank} /> */}
               <Avatar src={avatarUrl ? avatarUrl : blank} />
               <label htmlFor="avatar">
                 <span>upload avatar</span>
